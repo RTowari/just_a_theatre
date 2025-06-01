@@ -1,3 +1,4 @@
 31/05/25 - First commit
 
 31/05/25 - Se agregaron archivos. Todavia no hay funcionalidad
+            - Se agregó la funcion de iniciarSesion, que setea el objeto usuario en la sesion

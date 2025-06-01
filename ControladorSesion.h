@@ -8,7 +8,7 @@ using namespace std;
 
 class ControladorSesion: public IControladorSesion{
     public:
-        void iniciarSesion(string nickname, string contrasenia);
+        bool iniciarSesion(string nickname, string contrasenia);
         //void cerrarSesion();
 };
 
