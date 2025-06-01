@@ -1,5 +1,6 @@
 #include "DtUsuario.h"
 #include "Usuario.h"
+#include "Sesion.h"
 
 #include <iostream>
 
@@ -17,12 +18,42 @@ void iniciarSesion();
 
 //OPERACION A (IMPLEMENTACION)
 void iniciarSesion(){
-    cout << "Hola A" << endl;
+    system("clear");
+	cout <<"_____________________________________________" <<endl;
+	cout <<"______INICIAR__SESION_______"<< endl;
+	string nickname, contrasenia;
+	cout << "NICKNAME: ";
+	cin >> nickname;
+	
+	bool loginExitoso = false;
+	while(!loginExitoso) {
+		cout << endl << "CONTRASENIA: ";
+		cin >> contrasenia;
+
+		loginExitoso = iconSesion->iniciarSesion(nickname, contrasenia);
+        
+		if (!loginExitoso) {
+            cout << "Contraseña incorrecta. Intenta nuevamente." << endl;
+        }
+
+	}
 }
 
 //OPERACION B (IMPLEMENTACION)
 void altaUsuario(){
-    cout << "Hola B" << endl;
+    system("clear");
+	cout <<"_____________________________________________" <<endl;
+	cout <<"______ALTA__USUARIO_______"<< endl;
+	string nickname, contrasenia, urlFoto;
+	cout << "NICKNAME: ";
+	cin >> nickname;
+	cout << endl << "FOTO: ";
+	cin >> urlFoto;
+	cout << endl << "CONTRASENIA: ";
+	cin >> contrasenia;
+
+	iconAltaUsuario->altaUsuario(nickname, contrasenia, urlFoto);
+
 }
 
 
