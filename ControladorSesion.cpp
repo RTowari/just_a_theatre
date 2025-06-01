@@ -21,7 +21,9 @@ bool ControladorSesion::iniciarSesion(string nickname, string contrasenia) {
             throw runtime_error("Contraseña incorrecta.");
         }
 
-        Sesion::getInstancia()->setUsuario(U); // Esto se asegura de que tengo una instancia de Sesion
+         // Esto se asegura de que tengo una instancia de Sesion
+         // Despues pone al usuario en la susodicha sesion
+        Sesion::getInstancia()->setUsuario(U);
 
         return true;
 

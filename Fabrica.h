@@ -1,6 +1,7 @@
 #ifndef FABRICA
 #define FABRICA
-#include "iControladorSesion.h"
+#include "IControladorSesion.h"
+#include "IControladorAltaUsuario.h"
 
 class Fabrica{
     private:
@@ -9,6 +10,11 @@ class Fabrica{
     public:
         static Fabrica* getInstancia();
         IControladorSesion* getIControladorSesion();
+        
+        IControladorAltaUsuario* getIControladorAltaUsuario();
+        
         ~Fabrica();
+
+
 };
 #endif

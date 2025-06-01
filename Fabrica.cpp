@@ -1,5 +1,6 @@
 #include "Fabrica.h"
 #include "ControladorSesion.h"
+#include "ControladorAltaUsuario.h"
 
 Fabrica* Fabrica::instancia = NULL;
 
@@ -13,6 +14,10 @@ Fabrica* Fabrica::getInstancia(){
 
 IControladorSesion* Fabrica::getIControladorSesion(){
     return new ControladorSesion();    
+}
+
+IControladorAltaUsuario* Fabrica::getIControladorAltaUsuario(){
+    return new ControladorAltaUsuario();    
 }
 
 Fabrica::~Fabrica(){}
