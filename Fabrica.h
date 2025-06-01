@@ -9,6 +9,7 @@ class Fabrica{
         Fabrica();
     public:
         static Fabrica* getInstancia();
+        
         IControladorSesion* getIControladorSesion();
         
         IControladorAltaUsuario* getIControladorAltaUsuario();

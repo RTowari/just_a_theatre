@@ -5,3 +5,4 @@
 
 32/05/25 - Se agrego algo de funcionalidad al main para desbugueo
         - Se agrego altaUsuario y iniciarSesion y ambas estan fuuncionales. Es posible que se requiera codigo extra para ciertas condiciones
+        - altaUsuario, iniciarSesion y cerrarSesion ya estan funcionales en el front

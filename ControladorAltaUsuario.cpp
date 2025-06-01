@@ -7,7 +7,7 @@ void ControladorAltaUsuario::altaUsuario(string nickname, string contrasenia, st
     // creo un usuario con los datos que me paso
     Usuario* user = new Usuario(nickname, contrasenia, urlFoto);
 
-    // Llamo a la instancia de manejador y luego le paso el usuario para que loa gregue
+    // Llamo a la instancia de manejador y luego le paso el usuario para que lo agregue
     ManejadorUsuario::getInstancia()->agregarUsuario(user);
 
 

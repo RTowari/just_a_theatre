@@ -4,6 +4,7 @@
 
 #include <iostream>
 
+
 #include "IControladorAltaUsuario.h"
 #include "IControladorSesion.h"
 #include "Fabrica.h"
@@ -14,6 +15,15 @@ IControladorSesion* iconSesion;
 
 //OPERACION A
 void iniciarSesion();
+
+//OPERACION B
+void cerrarSesion();
+
+//OPERACION C
+void altaUsuario();
+
+//Operacion auxiliar para pausar la pantalla
+void pausarPantalla();
 
 
 //OPERACION A (IMPLEMENTACION)
@@ -40,6 +50,34 @@ void iniciarSesion(){
 }
 
 //OPERACION B (IMPLEMENTACION)
+void cerrarSesion(){
+    system("clear");
+    cout << "_____________________________________________" << endl;
+    cout << "______CERRAR SESION_______" << endl;
+
+    Usuario* usuarioActual = Sesion::getInstancia()->getUsuario();
+
+    if (usuarioActual != NULL) {
+        cout << "Usuario que cierra sesion: " << usuarioActual->getNickname() << endl;
+    } else {
+        cout << "No hay sesion activa." << endl;
+    }
+
+    iconSesion->cerrarSesion();
+
+    cout << "Sesion cerrada correctamente." << endl;
+
+	pausarPantalla();
+}
+
+//Operacion auxiliar para pausar la pantalla
+void pausarPantalla(){
+    cout << "Presione ENTER para continuar...";
+    cin.ignore();
+    cin.get();
+}
+
+//OPERACION C (IMPLEMENTACION)
 void altaUsuario(){
     system("clear");
 	cout <<"_____________________________________________" <<endl;
@@ -63,6 +101,7 @@ void menu(){
 		cout <<"____________CINE____________"<< endl;
 		cout <<"1. Iniciar Sesion"<<endl;
 		cout <<"2. Registrar Usuario"<<endl;
+		cout <<"3. Cerrar Sesion"<<endl;
 		cout <<"_____________________________________________" <<endl;
 		cout <<"OPCION: ";
 }
@@ -75,14 +114,20 @@ int main(){
     int opcion;
     menu();
     cin >> opcion;
-    while(opcion != 3){
+    while(opcion != 4){
 		switch(opcion){
 			case 1: iniciarSesion();
 				break;
 			case 2: altaUsuario();
+				break;
+			case 3: cerrarSesion();
+				break;
+			default: cout << "Opcion no valida. Intente nuevamente." << endl;
 				break;
         }
 		menu();
 		cin >> opcion;
 	}
 }
+
+

@@ -32,3 +32,8 @@ bool ControladorSesion::iniciarSesion(string nickname, string contrasenia) {
     }
 }
 
+void ControladorSesion::cerrarSesion(){
+    Sesion::getInstancia()->cerrarSesion();
+}
+
+

@@ -1,6 +1,9 @@
 #ifndef ICONTROLADORALTAUSUARIO
 #define ICONTROLADORALTAUSUARIO
 
+#include <string>
+#include "DtUsuario.h"
+
 using namespace std;
 
 class IControladorAltaUsuario{
