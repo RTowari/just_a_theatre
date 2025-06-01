@@ -1,15 +1,15 @@
 #ifndef CONTROLADORSESION
 #define CONTROLADORSESION
-#include "IControladorSesion.h"
+
 #include <string>
-#include <list>
+#include "iControladorSesion.h"
 
 using namespace std;
 
-class Controlador: public IControladorSesion{
+class ControladorSesion: public IControladorSesion{
     public:
         void iniciarSesion(string nickname, string contrasenia);
-        void cerrarSesion();
-
+        //void cerrarSesion();
 };
+
 #endif
