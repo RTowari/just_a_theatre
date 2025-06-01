@@ -1,7 +1,3 @@
-#include "DtUsuario.h"
-#include "Usuario.h"
-#include "Sesion.h"
-
 #include <iostream>
 
 
@@ -55,26 +51,11 @@ void cerrarSesion(){
     cout << "_____________________________________________" << endl;
     cout << "______CERRAR SESION_______" << endl;
 
-    Usuario* usuarioActual = Sesion::getInstancia()->getUsuario();
-
-    if (usuarioActual != NULL) {
-        cout << "Usuario que cierra sesion: " << usuarioActual->getNickname() << endl;
-    } else {
-        cout << "No hay sesion activa." << endl;
-    }
-
     iconSesion->cerrarSesion();
 
     cout << "Sesion cerrada correctamente." << endl;
 
 	pausarPantalla();
-}
-
-//Operacion auxiliar para pausar la pantalla
-void pausarPantalla(){
-    cout << "Presione ENTER para continuar...";
-    cin.ignore();
-    cin.get();
 }
 
 //OPERACION C (IMPLEMENTACION)
@@ -130,4 +111,11 @@ int main(){
 	}
 }
 
+
+//OPERACIONES AUXILIARES
+void pausarPantalla(){
+    cout << "Presione ENTER para continuar...";
+    cin.ignore();
+    cin.get();
+}
 
