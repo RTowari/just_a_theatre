@@ -1,23 +1,17 @@
-main: DtUsuario.o Usuario.o main.o ControladorAltaUsuario.o ControladorSesion.o ManejadorUsuario.o Fabrica.o Sesion.o DtSesion.o
-	g++ DtUsuario.o Usuario.o ControladorAltaUsuario.o ControladorSesion.o ManejadorUsuario.o Fabrica.o DtSesion.o Sesion.o main.o -o main
+# Aca fede. Vamos a usar este formato para los make file porque sino nos vamos a volver locos con tanto archivo
 
-DtUsuario.o: DtUsuario.cpp
+CC = g++
+SRC = DtUsuario.cpp Usuario.cpp ControladorAltaUsuario.cpp ControladorSesion.cpp ManejadorUsuario.cpp \
+      Fabrica.cpp Sesion.cpp DtSesion.cpp Pelicula.cpp Funcion.cpp DtFecha.cpp DtHorario.cpp \
+      ManejadorPelicula.cpp ControladorAltaPelicula.cpp main.cpp
 
-Usuario.o: Usuario.cpp
+OBJ = $(SRC:.cpp=.o)
 
-ControladorAltaUsuario.o: ControladorAltaUsuario.cpp
+main: $(OBJ)
+	$(CC) $(OBJ) -o main
 
-ControladorSesion.o: ControladorSesion.cpp
-
-ManejadorUsuario.o: ManejadorUsuario.cpp
-
-Fabrica.o: Fabrica.cpp
-
-Sesion.o: Sesion.cpp
-
-DtSesion: DtSesion.cpp
-
-main.o: main.cpp
+%.o: %.cpp
+	$(CC) -c $<
 
 clean:
 	rm -rf *.o main

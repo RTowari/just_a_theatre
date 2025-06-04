@@ -1,6 +1,7 @@
 #include "Fabrica.h"
 #include "ControladorSesion.h"
 #include "ControladorAltaUsuario.h"
+#include "ControladorAltaPelicula.h"
 
 Fabrica* Fabrica::instancia = NULL;
 

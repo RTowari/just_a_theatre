@@ -10,6 +10,7 @@ class ControladorSesion: public IControladorSesion{
     public:
         bool iniciarSesion(string nickname, string contrasenia);
         void cerrarSesion();
+        bool usuarioExiste(string nickname);
 };
 
 #endif

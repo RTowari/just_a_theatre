@@ -1,6 +1,6 @@
 #include <iostream>
 
-
+#include "IControladorAltaPelicula.h"
 #include "IControladorAltaUsuario.h"
 #include "IControladorSesion.h"
 #include "Fabrica.h"
@@ -10,7 +10,7 @@ IControladorAltaUsuario* iconAltaUsuario;
 IControladorSesion* iconSesion;
 
 //OPERACION A
-void iniciarSesion();
+bool iniciarSesion();
 
 //OPERACION B
 void cerrarSesion();
@@ -18,12 +18,15 @@ void cerrarSesion();
 //OPERACION C
 void altaUsuario();
 
+//OPERACION D
+void altaPelicula();
+
 //Operacion auxiliar para pausar la pantalla
 void pausarPantalla();
 
 
 //OPERACION A (IMPLEMENTACION)
-void iniciarSesion(){
+bool iniciarSesion(){
     system("clear");
 	cout <<"_____________________________________________" <<endl;
 	cout <<"______INICIAR__SESION_______"<< endl;
@@ -35,27 +38,25 @@ void iniciarSesion(){
 	while(!loginExitoso) {
 		cout << endl << "CONTRASENIA: ";
 		cin >> contrasenia;
-
+		
 		loginExitoso = iconSesion->iniciarSesion(nickname, contrasenia);
-        
-		if (!loginExitoso) {
+        if (!loginExitoso) {
             cout << "Contraseña incorrecta. Intenta nuevamente." << endl;
         }
-
 	}
+
+	return loginExitoso;
+
 }
 
 //OPERACION B (IMPLEMENTACION)
 void cerrarSesion(){
-    system("clear");
-    cout << "_____________________________________________" << endl;
-    cout << "______CERRAR SESION_______" << endl;
 
     iconSesion->cerrarSesion();
 
-    cout << "Sesion cerrada correctamente." << endl;
+    //cout << "Sesion cerrada correctamente." << endl;
 
-	pausarPantalla();
+	//pausarPantalla();
 }
 
 //OPERACION C (IMPLEMENTACION)
@@ -76,7 +77,7 @@ void altaUsuario(){
 }
 
 
-void menu(){
+void menuLogin(){
     	system("clear");
 		cout <<"_____________________________________________" <<endl;
 		cout <<"____________CINE____________"<< endl;
@@ -87,18 +88,29 @@ void menu(){
 		cout <<"OPCION: ";
 }
 
+void menu(){
+
+
+}
 
 int main(){
     fabrica = Fabrica::getInstancia();
     iconAltaUsuario = fabrica->getIControladorAltaUsuario();
     iconSesion = fabrica->getIControladorSesion();
     int opcion;
-    menu();
+    menuLogin();
     cin >> opcion;
     while(opcion != 4){
 		switch(opcion){
-			case 1: iniciarSesion();
-				break;
+			case 1: if(iniciarSesion()){
+				while(opcion != 2){
+					switch(opcion){
+						case 1: cout<<"altaPelicula"<<endl;
+						case 2: cout<<"Salir"<<endl;
+					}
+				}
+			}
+			break;
 			case 2: altaUsuario();
 				break;
 			case 3: cerrarSesion();
@@ -106,7 +118,7 @@ int main(){
 			default: cout << "Opcion no valida. Intente nuevamente." << endl;
 				break;
         }
-		menu();
+		menuLogin();
 		cin >> opcion;
 	}
 }
