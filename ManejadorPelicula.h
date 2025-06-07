@@ -20,6 +20,7 @@ class ManejadorPelicula{
         void agregarPelicula(Pelicula*);
         bool existePelicula(string);
         void eliminarPelicula(string);
+        void verPeliculas();
         virtual ~ManejadorPelicula();
 };
 #endif

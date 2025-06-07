@@ -2,6 +2,7 @@
 #define FABRICA
 #include "IControladorSesion.h"
 #include "IControladorAltaUsuario.h"
+#include "IControladorAltaPelicula.h"
 
 class Fabrica{
     private:
@@ -14,6 +15,8 @@ class Fabrica{
         
         IControladorAltaUsuario* getIControladorAltaUsuario();
         
+        IControladorAltaPelicula* getIControladorAltaPelicula();
+
         ~Fabrica();
 
 

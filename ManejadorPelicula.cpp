@@ -1,6 +1,7 @@
 #include "Pelicula.h"
 #include <list>
 #include "ManejadorPelicula.h"
+#include <iostream>
 
 using namespace std;
 
@@ -38,6 +39,12 @@ bool ManejadorPelicula::existePelicula(string nickname){
 void ManejadorPelicula::eliminarPelicula(string nickname){
     map<string,Pelicula*>::iterator it = this->peliculas.find(nickname);
     this->peliculas.erase(it);
+}
+
+void ManejadorPelicula::verPeliculas(){
+    for(map<string,Pelicula*>::iterator it = this->peliculas.begin(); it!=peliculas.end(); ++it){
+        cout << it->first << "\n" << endl;
+    }
 }
 
 ManejadorPelicula::~ManejadorPelicula(){}

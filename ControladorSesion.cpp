@@ -4,14 +4,6 @@
 
 #include <stdexcept>
 
-bool ControladorSesion::usuarioExiste(string nickname){
-    ManejadorUsuario* mU = ManejadorUsuario::getInstancia();
-
-    bool existenciaUsuario = mU->existeUsuario(nickname);
-
-    return existenciaUsuario;
-}
-
 bool ControladorSesion::iniciarSesion(string nickname, string contrasenia) {
     
     try{
@@ -43,7 +35,5 @@ bool ControladorSesion::iniciarSesion(string nickname, string contrasenia) {
 void ControladorSesion::cerrarSesion(){
     Sesion::getInstancia()->cerrarSesion();
 }
-
-
 
 

@@ -21,5 +21,10 @@ IControladorAltaUsuario* Fabrica::getIControladorAltaUsuario(){
     return new ControladorAltaUsuario();    
 }
 
+IControladorAltaPelicula* Fabrica::getIControladorAltaPelicula(){
+    return new ControladorAltaPelicula();    
+}
+
+
 Fabrica::~Fabrica(){}
 
