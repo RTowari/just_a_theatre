@@ -16,10 +16,10 @@ public:
 
     
     //no permito setear ID esto lo controla y autogenera el manejador de cines
-    int getId();
+    int getId() const;
 
     void setCapacidad(int);
-    int getCapacidad();
+    int getCapacidad() const;
 };
 
 #endif

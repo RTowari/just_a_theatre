@@ -1,38 +1,94 @@
-#include "Cine.h"
-Cine::Cine(){}
-Cine::Cine(int id,string direccion){
-	this->id=id;
-	this->direccion=direccion;
-    this->topeSalas=0;
-}
-int Cine::getId(){
-	return this->id;
-}
-    //no permito setear ID esto lo controla y autogenera el manejador de cines
+    #include "Cine.h"
+    #include "Pelicula.h"
+    #include "DtDireccion.h"
 
-string Cine::getDireccion(){
-	return this->direccion;
-}
-void Cine::setDireccion(string direccion){
-	this->direccion=direccion;
-}
-Cine::~Cine(){
-	for(int i = 0;i<this->topeSalas;i++){
-		delete this->salas[i];
-        this->salas[i] = nullptr ;
+    #include <map>
+    #include <list>
+    #include <string>
+    #include <stdexcept>
+    #include <iostream>
+
+    using namespace std;
+
+    Cine::Cine(){}
+    Cine::Cine(int id,DtDireccion dtDireccion){
+        this->id=id;
+        this->dtDireccion=dtDireccion;
+        this->topeSalas=0;
     }
+    int Cine::getId(){
+        return this->id;
+    }
+        //no permito setear ID esto lo controla y autogenera el manejador de cines
+
+    DtDireccion Cine::getDireccion() const{
+        return this->dtDireccion;
+    }
+    void Cine::setDireccion(DtDireccion dtDireccion){
+        this->dtDireccion=dtDireccion;
+    }
+    Cine::~Cine(){
+        for(int i = 0;i<this->topeSalas;i++){
+            delete this->salas[i];
+            this->salas[i] = nullptr ;
+        }
+    }
+
+    void Cine::agregarSala(Sala* sala){
+        this->salas[this->topeSalas]=sala;
+        this->topeSalas++;
+    }
+    int Cine::getTopeSalas(){
+        return this->topeSalas;
+    }
+    const Sala** Cine::obtenerSalas() const{
+        Sala** salas = new Sala*[this->topeSalas];
+        for(int i=0;i<this->topeSalas;i++)
+            salas[i]=this->salas[i];
+        return (const Sala**)this->salas;
+    }
+
+    void Cine::agregarPelicula(Pelicula* pelicula) {
+
+        string titulo = pelicula->getTitulo();
+
+        try {
+            // Check por si la pelicula ya existe
+            if (peliculas.find(titulo) != peliculas.end()) {
+                throw std::runtime_error("Error: La pelicula '" + titulo + "' ya existe en el cine.");
+            }
+
+            // Sino existe, la pone en el cine
+            peliculas[titulo] = pelicula;
+
+        } catch (const std::runtime_error& e) {
+            cout << e.what() << endl; // Print error message to console
+        }
+    }
+
+    void Cine::mostrarInformacion() const {
+    cout << "\n--- Informacion del Cine ---" << endl;
+    cout << "ID: " << id << endl;
+    cout << "Direccion: Calle " << dtDireccion.getCalle() << ", Numero " << dtDireccion.getNumero() << endl;
+    cout << "Cantidad de Salas: " << topeSalas << endl;
+
+    if (topeSalas > 0) {
+        cout << "  Salas:" << endl;
+        // obtenerSalas() devuelve Sala**, que es un puntero al array de punteros a Salas.
+        const Sala** salasArray = obtenerSalas();
+        for (int i = 0; i < topeSalas; ++i) {
+            if (salasArray[i] != nullptr) { // Verificación de seguridad
+                cout << "    - Sala ID: " << salasArray[i]->getId()
+                          << ", Capacidad: " << salasArray[i]->getCapacidad() << endl;
+            }
+        }
+    } else {
+        cout << "  (No hay salas registradas para este cine)" << endl;
+    }
+    cout << "----------------------------" << endl;
 }
 
-void Cine::agregarSala(Sala* sala){
-	this->salas[this->topeSalas]=sala;
-	this->topeSalas++;
-}
-int Cine::getTopeSalas(){
-	return this->topeSalas;
-}
-Sala** Cine::obtenerSalas(){
-	Sala** salas = new Sala*[this->topeSalas];
-	for(int i=0;i<this->topeSalas;i++)
-		salas[i]=this->salas[i];
-	return salas;
-}
+
+
+
+

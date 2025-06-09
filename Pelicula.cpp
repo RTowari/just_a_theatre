@@ -47,3 +47,7 @@ float Pelicula::getPuntajePromedio() {
 string Pelicula::getPoster() {
     return this->poster;
 }
+
+DtPelicula Pelicula::getDt() {
+    return DtPelicula(this->titulo, this->sinopsis, this->puntajePromedio, this->poster);
+}

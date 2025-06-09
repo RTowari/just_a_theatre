@@ -3,6 +3,9 @@
 #include "IControladorSesion.h"
 #include "IControladorAltaUsuario.h"
 #include "IControladorAltaPelicula.h"
+#include "IControladorCrearReserva.h"
+#include "IControladorAltaCine.h"
+
 
 class Fabrica{
     private:
@@ -16,6 +19,10 @@ class Fabrica{
         IControladorAltaUsuario* getIControladorAltaUsuario();
         
         IControladorAltaPelicula* getIControladorAltaPelicula();
+
+        IControladorCrearReserva* getIControladorCrearReserva();
+
+        IControladorAltaCine* getIControladorAltaCine();
 
         ~Fabrica();
 

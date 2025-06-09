@@ -23,6 +23,9 @@ list<Usuario*> ManejadorUsuario::getUsuarios(){
 
 Usuario* ManejadorUsuario::buscarUsuario(string nickname){
     map<string,Usuario*>::iterator it = this->usuarios.find(nickname);
+    if (it == this->usuarios.end()) {
+        return nullptr;
+    }
     return it->second;
 }
 

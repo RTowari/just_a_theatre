@@ -9,7 +9,7 @@ using namespace std;
 
 class ControladorAltaCine:public IControladorAltaCine{
     public:
-        virtual void altaCine(const DtCine& dtCine, const std::vector<int>& capacidadesSalas)=0;
+        void altaCine(const DtCine& dtCine, const std::vector<int>& capacidadesSalas);
 };
 
 #endif

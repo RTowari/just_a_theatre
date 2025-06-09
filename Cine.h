@@ -1,31 +1,43 @@
 #ifndef CINE_H
 #define CINE_H
 #define CANT_SALAS 20
+
+#include "DtDireccion.h"
 #include "Sala.h"
+#include "Pelicula.h"
+#include <map>
+#include <list>
 #include <string>
+
 using namespace std;
 
 class Cine {
 private:
     int id;
-    string direccion;
+    DtDireccion dtDireccion;
     Sala* salas[CANT_SALAS];
     int topeSalas;
+    map<string,Pelicula*> peliculas;
 
 public:
     Cine();
-    Cine(int, string);
+    Cine(int, DtDireccion);
     ~Cine();
 
     //no permito setear ID esto lo controla y autogenera el manejador de cines
-    void setDireccion(string);
+    void setDireccion(DtDireccion dtDireccion);
 
     int getId();
-    string getDireccion();
+    DtDireccion getDireccion() const;
 
     void agregarSala(Sala*);
-	Sala** obtenerSalas();
+	const Sala** obtenerSalas() const;
 	int getTopeSalas();
+
+    // Funciones para controlar las peliculas del cine
+    void agregarPelicula(Pelicula* pelicula);
+
+    void mostrarInformacion() const; 
 };
 
 #endif

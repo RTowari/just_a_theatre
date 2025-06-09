@@ -1,25 +1,24 @@
-#ifndef DTCINE_H
-#define DTCINE_H
-#define CANT_SALAS 20
-#include "DtSala.h"
+
+#ifndef DT_CINE_H
+#define DT_CINE_H
+
+#include "DtDireccion.h"
 #include <string>
-using namespace std;
 
 class DtCine {
 private:
     int id;
-    string direccion;
-    DtSala* salas[CANT_SALAS];
+    DtDireccion direccion; // now DtDireccion type, not string
     int topeSalas;
-
 public:
     DtCine();
-    DtCine(int, string);
-    ~DtCine();
+    DtCine(DtDireccion direccion);
+    DtCine(int id, DtDireccion direccion);
+    
     int getId();
-    string getDireccion() const;
-	DtSala** obtenerSalas();
-	int getTopeSalas();
+    DtDireccion getDireccion() const;
+    int getTopeSalas();
 };
 
 #endif
+

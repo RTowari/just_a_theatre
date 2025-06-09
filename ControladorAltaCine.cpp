@@ -2,6 +2,7 @@
 #include "ManejadorCine.h"
 #include "Cine.h"
 #include "DtCine.h"
+#include "DtDireccion.h"
 #include <iostream>             
 #include <stdexcept>            
 #include <vector>              
@@ -18,7 +19,9 @@ void ControladorAltaCine::altaCine(const DtCine& dtCine, const std::vector<int>&
         //    El ManejadorCine se encarga de agregar nuevoCine a su colección y generar los IDs para las Salas.
         //    Tambien va a* crear las Salas y agregarlas a 'nuevoCine'.
         mC->darDeAltaCine(nuevoCine, capacidadesSalas);
-        cout << "INFO: Cine '" << dtCine.getDireccion() << "' (ID: " << idCine << ") y sus salas dados de alta exitosamente." << endl;
+         cout << "INFO: Cine con direccion (Calle: " << dtCine.getDireccion().getCalle()
+             << ", Numero: " << dtCine.getDireccion().getNumero() << ") y sus salas dados de alta exitosamente." << endl;
+        nuevoCine->mostrarInformacion();
     } catch (const std::invalid_argument& e) {
         cerr << "ERROR en Alta Cine (argumento inválido): " << e.what() << endl;
         if (nuevoCine != nullptr) {

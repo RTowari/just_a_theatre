@@ -6,7 +6,11 @@ Funcion::Funcion(int id, DtFecha* f, DtHorario* h){
     this->fecha = f;
     this->horario = h;
 }
-Funcion::~Funcion(){}
+Funcion::~Funcion(){
+        for (Reserva* reserva : reservas) {
+        delete reserva; 
+    }
+}
 
 void Funcion::setId(int id){
     this->id = id;
@@ -30,4 +34,12 @@ DtFecha* Funcion::getFecha(){
 
 DtHorario* Funcion::getHorario(){
     return this->horario;
+}
+
+void Funcion::agregarReserva(Reserva* reserva) {
+    reservas.push_back(reserva);
+}
+
+list<Reserva*> Funcion::getReservas() {
+    return reservas;
 }

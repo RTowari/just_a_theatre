@@ -12,10 +12,12 @@ private:
 public:
     DtSala();
     DtSala(int, int);
-    ~DtSala();   
+      
     //no permito setear ID esto lo controla y autogenera el manejador de cines
     int getId();
     int getCapacidad();
+
+    ~DtSala(); 
 };
 
 #endif

@@ -1,6 +1,8 @@
 #ifndef PELICULA_H
 #define PELICULA_H
 
+#include "DtPelicula.h"
+
 #include <string>
 using namespace std;
 
@@ -25,6 +27,8 @@ public:
     string getSinopsis();
     float getPuntajePromedio();
     string getPoster();
+
+    DtPelicula getDt();
 };
 
 #endif

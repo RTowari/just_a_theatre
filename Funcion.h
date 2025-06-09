@@ -1,8 +1,13 @@
-#ifndef FUNCION
-#define FUNCION
+#ifndef FUNCION_H
+#define FUNCION_H
+
+#include <list>
 
 #include "DtFecha.h"
 #include "DtHorario.h"
+#include "Reserva.h"
+
+using namespace std;
 
 class Funcion{
 
@@ -10,6 +15,7 @@ class Funcion{
         int id;
         DtFecha* fecha;
         DtHorario* horario;
+        list<Reserva*> reservas;
     public:
         Funcion();
         Funcion(int,DtFecha*,DtHorario*);
@@ -22,6 +28,9 @@ class Funcion{
         int getId();
         DtFecha* getFecha();
         DtHorario* getHorario();
+
+        void agregarReserva(Reserva*);
+        list<Reserva*> getReservas();
 };
 
 #endif

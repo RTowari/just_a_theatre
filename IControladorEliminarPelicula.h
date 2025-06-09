@@ -1,7 +1,7 @@
 #ifndef ICONTROLADORELIMINARPELUCLA
 #define ICONTROLADORELIMINARPELUCLA
 
-#include <string.h>
+#include <string>
 
 using namespace std;
 
