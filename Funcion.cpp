@@ -43,3 +43,11 @@ void Funcion::agregarReserva(Reserva* reserva) {
 list<Reserva*> Funcion::getReservas() {
     return reservas;
 }
+
+Pelicula* Funcion::getPelicula(){       //para cu eliminarPelicula
+    return this->pelicula;
+}
+
+void Funcion::eliminarPelicula(){       //para cu eliminarPelicula
+    this->pelicula = NULL;
+}

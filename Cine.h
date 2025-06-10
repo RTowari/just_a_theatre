@@ -1,6 +1,6 @@
 #ifndef CINE_H
 #define CINE_H
-#define CANT_SALAS 20
+#define CANT_SALAS 30
 
 #include "DtDireccion.h"
 #include "Sala.h"
@@ -35,8 +35,10 @@ public:
 	int getTopeSalas();
 
     // Funciones para controlar las peliculas del cine
-    void agregarPelicula(Pelicula* pelicula);
+    void agregarPelicula(Pelicula* pelicula);               
 
+    void eliminarPeliculaCine(string titulo);               //cu eliminarPelicula
+    void eliminarPeliculaDeFunciones(string titulo);        //cu eliminarPelicula
     void mostrarInformacion() const; 
 };
 

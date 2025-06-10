@@ -66,6 +66,21 @@
         }
     }
 
+    void Cine::eliminarPeliculaCine(string titulo){
+        try{
+          peliculas.erase(titulo);
+        } catch (const std::runtime_error& e) {
+            cout << e.what() << endl; // Print error message to console
+        }
+    }
+
+    void Cine::eliminarPeliculaDeFunciones(string titulo){
+
+        for(int i=0; i<=topeSalas; i++){
+            salas[i]->eliminarPeliFuncion(titulo);
+        }
+    }
+
     void Cine::mostrarInformacion() const {
     cout << "\n--- Informacion del Cine ---" << endl;
     cout << "ID: " << id << endl;
@@ -87,8 +102,6 @@
     }
     cout << "----------------------------" << endl;
 }
-
-
 
 
 

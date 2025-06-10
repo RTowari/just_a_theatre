@@ -3,8 +3,13 @@
 31/05/25 - Se agregaron archivos. Todavia no hay funcionalidad
             - Se agregó la funcion de iniciarSesion, que setea el objeto usuario en la sesion
 
-1/05/25 - Se agrego algo de funcionalidad al main para desbugueo
+1/06/25 - Se agrego algo de funcionalidad al main para desbugueo
         - Se agrego altaUsuario y iniciarSesion y ambas estan fuuncionales. Es posible que se requiera codigo extra para ciertas condiciones
         - altaUsuario, iniciarSesion y cerrarSesion ya estan funcionales en el front
 
-4/05/25 - Agregados archivos para peliculas, cine y funcion para empezar la implementacion de casos de uso
+4/06/25 - Agregados archivos para peliculas, cine y funcion para empezar la implementacion de casos de uso
+
+9/06/25 - Bug fix: se corrigió la fecha en el log que mostraba el mes equivocado
+        - Se confirmo que iniciarSesion puede dar segmentation fault si el usuario pone un nickname incorrecto
+        - Se terminó oficialmente iniciarSesion, cerrarSesion, altaCine, altaPelicula
+        - Comenzó el trabajo con altaFuncion, eliminarPelicula y puntarPelicula y verReservas

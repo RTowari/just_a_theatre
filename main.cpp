@@ -8,7 +8,6 @@
 #include "IControladorAltaCine.h"
 #include "Fabrica.h"
 
-<<<<<<< HEAD
 #include "DtPelicula.h"
 #include "DtCine.h"
 //PARA DESBUGUEO
@@ -23,11 +22,6 @@ IControladorSesion* iconSesion;
 IControladorAltaPelicula* iconAltaPelicula;
 IControladorAltaCine* iconAltaCine;
 IControladorCrearReserva* iconCrearReserva;
-=======
-Fabrica * fabrica;
-IControladorAltaUsuario* iconAltaUsuario;
-IControladorSesion* iconSesion;
->>>>>>> parent of 78acd6f (semi implementados los alta en el back)
 
 //CASO 1
 bool iniciarSesion();
@@ -41,7 +35,6 @@ void altaUsuario();
 //CASO 4
 void altaPelicula();
 
-<<<<<<< HEAD
 // CASO 5
 void altaCine();
 
@@ -50,30 +43,24 @@ void crearReserva();
 
 
 // OPERACIONES AUXILIARES
-=======
-//Operacion auxiliar para pausar la pantalla
->>>>>>> parent of 78acd6f (semi implementados los alta en el back)
 void pausarPantalla();
 
 // OPERACIONES DE DESBUGUEO
 void verPeliculas();
 
-<<<<<<< HEAD
 //CASO 1 (IMPLEMENTACION)
 bool iniciarSesion() {
-    //system("clear");
+    system("clear");
     cout << "_____________________________________________" << endl;
     cout << "______INICIAR SESION_______" << endl;
 
     string nickname, contrasenia;
 	bool sesionIniciada = false;
     
+    cout << "NICKNAME: ";
+    cin >> nickname;
 
     while (!sesionIniciada) {
-	
-		cout << "NICKNAME: ";
-	    cin >> nickname;
-
         // Solicitar contraseña
         cout << "\nCONTRASENIA: ";
         cin >> contrasenia;
@@ -82,41 +69,28 @@ bool iniciarSesion() {
         sesionIniciada = iconSesion->iniciarSesion(nickname, contrasenia);
 
         if (sesionIniciada) {
-            sesionIniciada = true; // Inicio exitoso, salimos del loop saque el break
-=======
-//OPERACION A (IMPLEMENTACION)
-bool iniciarSesion(){
-    system("clear");
-	cout <<"_____________________________________________" <<endl;
-	cout <<"______INICIAR__SESION_______"<< endl;
-	string nickname, contrasenia;
-	cout << "NICKNAME: ";
-	cin >> nickname;
-	
-	bool loginExitoso = false;
-	while(!loginExitoso) {
-		cout << endl << "CONTRASENIA: ";
-		cin >> contrasenia;
-		
-		loginExitoso = iconSesion->iniciarSesion(nickname, contrasenia);
-        if (!loginExitoso) {
-            cout << "Contraseña incorrecta. Intenta nuevamente." << endl;
->>>>>>> parent of 78acd6f (semi implementados los alta en el back)
+            break; // Inicio exitoso, salimos del loop
         }
-	}
 
-<<<<<<< HEAD
         // Mensaje de error y opciones
         cout << "_____________________________________________" << endl;
-        cout << "Credenciales incorrectas" << endl;
+        cout << "Contrasenia incorrecta" << endl;
         cout << "1. Intentar nuevamente" << endl;
         cout << "2. Volver al menu principal" << endl;
         cout << "_____________________________________________" << endl;
         cout << "OPCION: ";
-=======
-	return loginExitoso;
->>>>>>> parent of 78acd6f (semi implementados los alta en el back)
 
+        int opcion;
+        cin >> opcion;
+
+        if (opcion == 2) {
+            return false; // Salir y volver al menú
+        }
+
+        cout << "_____________________________________________" << endl;
+    }
+
+    return true; // Sesión iniciada correctamente
 }
 
 //CASO 2 (IMPLEMENTACION)
@@ -134,17 +108,12 @@ void altaUsuario(){
     system("clear");
 	cout <<"_____________________________________________" <<endl;
 	cout <<"______ALTA__USUARIO_______"<< endl;
+
 	string nickname, contrasenia, urlFoto;
-	cout << "NICKNAME: ";
-	cin >> nickname;
-	cout << endl << "FOTO: ";
-	cin >> urlFoto;
-	cout << endl << "CONTRASENIA: ";
-	cin >> contrasenia;
+	bool altaExitosa = false;
 
-	iconAltaUsuario->altaUsuario(nickname, contrasenia, urlFoto);
+	while(altaExitosa == false) {
 
-<<<<<<< HEAD
 		cout << "NICKNAME: ";
 		cin >> nickname;
 		cout << endl << "FOTO: ";
@@ -300,8 +269,6 @@ void crearReserva(){
 	}
 
 
-=======
->>>>>>> parent of 78acd6f (semi implementados los alta en el back)
 }
 
 // MENU
@@ -311,13 +278,12 @@ void menuLogin(){
 		cout <<"____________CINE____________"<< endl;
 		cout <<"1. Iniciar Sesion"<<endl;
 		cout <<"2. Registrar Usuario"<<endl;
-		cout <<"3. Cerrar Sesion"<<endl;
+		cout <<"3. Salir"<<endl;
 		cout <<"_____________________________________________" <<endl;
 		cout <<"OPCION: ";
 }
 
 void menu(){
-<<<<<<< HEAD
 		//system("clear");
 		cout <<"_____________________________________________" <<endl;
 		cout <<"____________CINE____________"<< endl;
@@ -329,17 +295,12 @@ void menu(){
 		cout <<"7. Crear Reserva"<<endl;
 		cout <<"_____________________________________________" <<endl;
 		cout <<"OPCION: ";
-=======
-
-
->>>>>>> parent of 78acd6f (semi implementados los alta en el back)
 }
 
 int main(){
     fabrica = Fabrica::getInstancia();
     iconAltaUsuario = fabrica->getIControladorAltaUsuario();
     iconSesion = fabrica->getIControladorSesion();
-<<<<<<< HEAD
     iconAltaPelicula = fabrica->getIControladorAltaPelicula();
 	iconAltaCine = fabrica->getIControladorAltaCine();
 	iconCrearReserva = fabrica->getIControladorCrearReserva();
@@ -367,37 +328,24 @@ int main(){
 								break;
 							case 7: crearReserva();
 								break;
+							case 8: 
 							default: cout << "Opcion no valida. Intente nuevamente." << endl;
 								break;
 						}
 					}while(opc != 3);
 					
-=======
-    int opcion;
-    menuLogin();
-    cin >> opcion;
-    while(opcion != 4){
-		switch(opcion){
-			case 1: if(iniciarSesion()){
-				while(opcion != 2){
-					switch(opcion){
-						case 1: cout<<"altaPelicula"<<endl;
-						case 2: cout<<"Salir"<<endl;
-					}
->>>>>>> parent of 78acd6f (semi implementados los alta en el back)
 				}
-			}
-			break;
+				break;
 			case 2: altaUsuario();
 				break;
-			case 3: cerrarSesion();
+			case 3: cout << "\nSaliendo del programa..." <<endl;
 				break;
 			default: cout << "Opcion no valida. Intente nuevamente." << endl;
 				break;
         }
-		menuLogin();
-		cin >> opcion;
-	}
+
+	}while(opcion != 3);
+	
 }
 
 
@@ -416,3 +364,4 @@ void verPeliculas(){	//FUNCION DE PRUEBA PARA COMPROBAR ALTAPELICULA
 	manejador->verPeliculas();
 	pausarPantalla();
 }
+					

@@ -18,4 +18,10 @@ void Sala::setCapacidad(int capacidad){
 Sala::~Sala() {}
 
 
-
+void Sala::eliminarPeliFuncion(string titulo){
+	
+	for (map<int,Funcion*>::iterator iterator=this->funciones.begin(); iterator!=funciones.end(); ++iterator)
+		if(iterator->second->getPelicula()->getTitulo() == titulo){
+			iterator->second->eliminarPelicula();
+		}
+}

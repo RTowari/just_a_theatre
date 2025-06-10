@@ -23,7 +23,6 @@ IControladorAltaUsuario* Fabrica::getIControladorAltaUsuario(){
     return new ControladorAltaUsuario();    
 }
 
-<<<<<<< HEAD
 IControladorAltaPelicula* Fabrica::getIControladorAltaPelicula(){
     return new ControladorAltaPelicula();    
 }
@@ -37,7 +36,5 @@ IControladorAltaCine* Fabrica::getIControladorAltaCine(){
 }
 
 
-=======
->>>>>>> parent of 78acd6f (semi implementados los alta en el back)
 Fabrica::~Fabrica(){}
 
