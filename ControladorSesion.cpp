@@ -4,6 +4,14 @@
 
 #include <stdexcept>
 
+bool ControladorSesion::usuarioExiste(string nickname){
+    ManejadorUsuario* mU = ManejadorUsuario::getInstancia();
+
+    bool existenciaUsuario = mU->existeUsuario(nickname);
+
+    return existenciaUsuario;
+}
+
 bool ControladorSesion::iniciarSesion(string nickname, string contrasenia) {
     
         // Obtengo la instancia del manejador
@@ -43,5 +51,7 @@ bool ControladorSesion::iniciarSesion(string nickname, string contrasenia) {
 void ControladorSesion::cerrarSesion(){
     Sesion::getInstancia()->cerrarSesion();
 }
+
+
 
 

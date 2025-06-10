@@ -2,14 +2,13 @@
 #define CONTROLADORALTAPELICULA
 
 #include <string>
-#include "IControladorAltaPelicula.h"
+#include "IControladorAltaUsuario.h"
 
 using namespace std;
 
-class ControladorAltaPelicula: public IControladorAltaPelicula{
+class ControladorAltaPelicula:public IControladorAltaUsuario{
     public:
-        void altaPelicula(string titulo, string sinopsis, float PuntajePromedio, string urlFoto);
-        
+        virtual void altaPelicula(string titulo, string sinopsis, float PuntajePromedio, string urlFoto)=0;
 };
 
 

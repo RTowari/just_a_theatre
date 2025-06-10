@@ -12,11 +12,3 @@ void ControladorAltaUsuario::altaUsuario(string nickname, string contrasenia, st
 
 
 }
-
-bool ControladorAltaUsuario::existeUsuario(string nickname){
-    ManejadorUsuario* mU = ManejadorUsuario::getInstancia();
-
-    bool existenciaUsuario = mU->existeUsuario(nickname);
-
-    return existenciaUsuario;
-}
