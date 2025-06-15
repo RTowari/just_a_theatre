@@ -42,8 +42,13 @@ void ManejadorPelicula::eliminarPelicula(string nickname){
 }
 
 void ManejadorPelicula::verPeliculas(){
-    for(map<string,Pelicula*>::iterator it = this->peliculas.begin(); it!=peliculas.end(); ++it){
-        cout << it->first << "\n" << endl;
+
+    if(peliculas.empty()){
+       throw runtime_error("No hay peliculas cargadas.");
+    }else{
+        for(map<string,Pelicula*>::iterator it = this->peliculas.begin(); it!=peliculas.end(); ++it){
+            cout << it->first << "\n" << endl;
+        }
     }
 }
 

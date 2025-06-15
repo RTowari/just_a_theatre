@@ -4,6 +4,9 @@
 #include "ControladorAltaPelicula.h"
 #include "ControladorCrearReserva.h"
 #include "ControladorAltaCine.h"
+#include "ControladorEliminarPelicula.h"
+#include "ControladorComentarPelicula.h"
+#include "ControladorAltaFuncion.h"
 
 Fabrica* Fabrica::instancia = NULL;
 
@@ -33,6 +36,18 @@ IControladorCrearReserva* Fabrica::getIControladorCrearReserva(){
 
 IControladorAltaCine* Fabrica::getIControladorAltaCine(){
     return new ControladorAltaCine();
+}
+
+IControladorEliminarPelicula* Fabrica::getIControladorEliminarPelicula(){
+    return new ControladorEliminarPelicula();
+}
+
+IControladorComentarPelicula* Fabrica::getIControladorComentarPelicula(){
+    return new ControladorComentarPelicula();
+}
+
+IControladorAltaFuncion* Fabrica::getIControladorAltaFuncion(){
+    return new ControladorAltaFuncion();
 }
 
 

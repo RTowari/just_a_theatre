@@ -51,3 +51,11 @@ string Pelicula::getPoster() {
 DtPelicula Pelicula::getDt() {
     return DtPelicula(this->titulo, this->sinopsis, this->puntajePromedio, this->poster);
 }
+
+vector<Comentario*> Pelicula::getComentarios(){
+    return this->comentarios;
+}
+
+void Pelicula::agregarComentario(Comentario* comentario){
+    comentarios.push_back(comentario);
+}

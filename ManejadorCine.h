@@ -31,6 +31,7 @@ public:
     bool existeCine(int id);
     void eliminarCine(int id);
     void eliminarPeliculaDeCines(string titulo);
+    vector<Sala*> obtenerSalasDeCine(int id);
     virtual ~ManejadorCine();
 };
 

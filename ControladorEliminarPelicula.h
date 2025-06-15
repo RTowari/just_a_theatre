@@ -6,11 +6,9 @@
 
 class ControladorEliminarPelicula : public IControladorEliminarPelicula{
 
-    private:
-
     public:
+        void listarPeliculas();
         void eliminarPelicula(string titulo);
-
 };
 
 

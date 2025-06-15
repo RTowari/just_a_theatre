@@ -3,11 +3,14 @@
 #define CANT_SALAS 30
 
 #include "DtDireccion.h"
+#include "DtCine.h"
 #include "Sala.h"
 #include "Pelicula.h"
+
 #include <map>
 #include <list>
 #include <string>
+#include <vector>
 
 using namespace std;
 
@@ -24,6 +27,10 @@ public:
     Cine(int, DtDireccion);
     ~Cine();
 
+    // agregado para altafuncion
+    DtCine getDt();
+    Sala* obtenerSalaPorId(int id);
+
     //no permito setear ID esto lo controla y autogenera el manejador de cines
     void setDireccion(DtDireccion dtDireccion);
 
@@ -33,6 +40,7 @@ public:
     void agregarSala(Sala*);
 	const Sala** obtenerSalas() const;
 	int getTopeSalas();
+    std::vector<Sala*> obtenerSalas();
 
     // Funciones para controlar las peliculas del cine
     void agregarPelicula(Pelicula* pelicula);               

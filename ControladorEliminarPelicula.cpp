@@ -7,7 +7,10 @@ void ControladorEliminarPelicula::eliminarPelicula(string titulo){
 
     ManejadorCine::getInstancia()->eliminarPeliculaDeCines(titulo);
     
-    
-    ManejadorPelicula::eliminarPelicula(titulo);
 
+    ManejadorPelicula::getInstancia()->eliminarPelicula(titulo);
+}
+
+void ControladorEliminarPelicula::listarPeliculas(){
+    ManejadorPelicula::getInstancia()->verPeliculas();
 }

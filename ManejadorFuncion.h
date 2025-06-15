@@ -22,6 +22,7 @@ class ManejadorFuncion{
         bool existeFuncion(int);
         void eliminarFuncion(int);
         void verFunciones();
+        int generarNuevoId();
         virtual ~ManejadorFuncion();
 };
 

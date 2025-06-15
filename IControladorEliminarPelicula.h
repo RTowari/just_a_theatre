@@ -7,11 +7,9 @@ using namespace std;
 
 class IControladorEliminarPelicula{
 
-    private:
-            
     public:
-
-    void virtual eliminarPelicula(string titulo);
+        virtual void listarPeliculas()=0;
+        virtual void eliminarPelicula(string titulo)=0;
 
 };
 

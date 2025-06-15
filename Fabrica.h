@@ -1,11 +1,14 @@
-#ifndef FABRICA
-#define FABRICA
+#ifndef FABRICA_H
+#define FABRICA_H
+
 #include "IControladorSesion.h"
 #include "IControladorAltaUsuario.h"
 #include "IControladorAltaPelicula.h"
 #include "IControladorCrearReserva.h"
 #include "IControladorAltaCine.h"
-
+#include "IControladorEliminarPelicula.h"
+#include "IControladorComentarPelicula.h"
+#include "IControladorAltaFuncion.h"
 
 class Fabrica{
     private:
@@ -24,8 +27,15 @@ class Fabrica{
 
         IControladorAltaCine* getIControladorAltaCine();
 
+        IControladorEliminarPelicula* getIControladorEliminarPelicula();
+
+        IControladorComentarPelicula* getIControladorComentarPelicula();
+
+        IControladorAltaFuncion* getIControladorAltaFuncion();
+
         ~Fabrica();
 
 
 };
+
 #endif

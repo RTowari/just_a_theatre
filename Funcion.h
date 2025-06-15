@@ -14,22 +14,22 @@ class Funcion{
 
     private:
         int id;
-        DtFecha* fecha;
-        DtHorario* horario;
+        DtFecha fecha;
+        DtHorario horario;
         list<Reserva*> reservas;
         Pelicula* pelicula;                 //para cu eliminarPelicula
     public:
         Funcion();
-        Funcion(int,DtFecha*,DtHorario*);
+        Funcion(int,DtFecha,DtHorario);
         ~Funcion();
 
         void setId(int);
-        void setFecha(DtFecha*);
-        void setHorario(DtHorario*);
+        void setFecha(DtFecha);
+        void setHorario(DtHorario);
 
         int getId();
-        DtFecha* getFecha();
-        DtHorario* getHorario();
+        DtFecha getFecha();
+        DtHorario getHorario();
 
         Pelicula* getPelicula();            //para cu eliminarPelicula
 

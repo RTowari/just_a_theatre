@@ -47,6 +47,22 @@ void ManejadorFuncion::verFunciones(){
     }
 }
 
+int ManejadorFuncion::generarNuevoId(){
+    if(funciones.empty()){
+        return 1; // esto me retorna una id de 1, que seria la primera si nunca agregue una funcion
+    }
+
+    // cuenta las id y retorna la mas grande sin importar el orden
+    map<int, Funcion*>::iterator maxIdIt = funciones.begin();
+    for (map<int, Funcion*>::iterator it = funciones.begin(); it != funciones.end(); ++it) {
+        if (it->first > maxIdIt->first) {
+            maxIdIt = it;
+        }
+    }
+
+    return maxIdIt->first + 1;
+}
+
 ManejadorFuncion::~ManejadorFuncion(){}
 
 

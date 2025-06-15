@@ -1,4 +1,6 @@
 #include "Sala.h"
+#include "DtSala.h"
+
 Sala::Sala(){}
 Sala::Sala(int id,int capacidad){
 	this->id=id;
@@ -18,10 +20,19 @@ void Sala::setCapacidad(int capacidad){
 Sala::~Sala() {}
 
 
+
+
+
+//para cu eliminarPelicula
 void Sala::eliminarPeliFuncion(string titulo){
 	
 	for (map<int,Funcion*>::iterator iterator=this->funciones.begin(); iterator!=funciones.end(); ++iterator)
 		if(iterator->second->getPelicula()->getTitulo() == titulo){
-			iterator->second->eliminarPelicula();
+			iterator->second->eliminarPelicula();		//cambiar por destructor de funcion ?
 		}
+}
+
+//para cu AltaFuncion
+DtSala Sala::getDt(){
+    return DtSala(this->id, this->capacidad);
 }

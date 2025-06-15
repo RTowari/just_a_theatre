@@ -1,6 +1,8 @@
     #include "Cine.h"
     #include "Pelicula.h"
     #include "DtDireccion.h"
+    #include "DtCine.h"
+
 
     #include <map>
     #include <list>
@@ -102,6 +104,24 @@
     }
     cout << "----------------------------" << endl;
 }
+
+std::vector<Sala*> Cine::obtenerSalas() {
+    return std::vector<Sala*>(salas, salas + topeSalas);
+}
+
+// agregado para alta funcion
+DtCine Cine::getDt(){
+    return DtCine(this->id, this->dtDireccion);
+}
+Sala* Cine::obtenerSalaPorId(int id) {
+    for(int i=0; i < topeSalas; i++){
+        if (salas[i]->getId()==id){
+            return salas[i];
+        }
+    }
+    return nullptr;
+}
+
 
 
 

@@ -9,6 +9,5 @@ void ControladorAltaPelicula::altaPelicula(string titulo, string sinopsis, float
 
     // Llamo a la instancia de manejador y luego le paso la pelicula para que lo agregue
     ManejadorPelicula::getInstancia()->agregarPelicula(p);
-
-
+    
 }

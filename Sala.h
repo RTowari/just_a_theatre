@@ -1,9 +1,13 @@
 #ifndef SALA_H
 #define SALA_H
 
+#include "DtSala.h"
+#include "Funcion.h"
+
 #include <string>
 #include <map>
-#include "Funcion.h"
+
+
 using namespace std;
 
 class Sala {
@@ -22,7 +26,11 @@ public:
     void setCapacidad(int);
     int getCapacidad() const;
 
-    void eliminarPeliFuncion(string titulo);             //para cu eliminarPelicula
+    //para cu eliminarPelicula
+    void eliminarPeliFuncion(string titulo);                
+    
+    //para cu AltaFuncion
+    DtSala getDt();
 };
 
 #endif

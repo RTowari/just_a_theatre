@@ -1,15 +1,15 @@
 #include <iostream>
-
-#include "IControladorAltaPelicula.h"
-#include "IControladorAltaUsuario.h"
-#include "IControladorSesion.h"
 #include <limits>
-#include "IControladorCrearReserva.h"
-#include "IControladorAltaCine.h"
+
 #include "Fabrica.h"
 
 #include "DtPelicula.h"
 #include "DtCine.h"
+#include "DtSala.h"
+#include "DtFecha.h"
+#include "DtHorario.h"
+#include "DtComentario.h"
+
 //PARA DESBUGUEO
 #include "Pelicula.h"
 #include "ManejadorPelicula.h"
@@ -22,6 +22,9 @@ IControladorSesion* iconSesion;
 IControladorAltaPelicula* iconAltaPelicula;
 IControladorAltaCine* iconAltaCine;
 IControladorCrearReserva* iconCrearReserva;
+IControladorEliminarPelicula* iconEliminarPelicula;
+IControladorComentarPelicula* iconComentarPelicula;
+IControladorAltaFuncion* iconAltaFuncion;
 
 //CASO 1
 bool iniciarSesion();
@@ -41,6 +44,8 @@ void altaCine();
 //CASO 7
 void crearReserva();
 
+//CASO 11
+void comentarPelicula();
 
 // OPERACIONES AUXILIARES
 void pausarPantalla();
@@ -193,22 +198,158 @@ void altaCine(){
 	else ("INFO: Alta de cine cancelada por el usuario");
 }
 
+void altaFuncion(){
+
+	bool continuar = true;
+
+	while(continuar) {
+		cout <<"_____________________________________________" <<endl;
+		cout <<"_____________ALTA__FUNCION____________"<< endl;
+
+		// primero listo todas las peliculas registradas
+		// obtengo los titulos
+
+		std::list<std::string> titulos = iconCrearReserva->listarPeliculas();
+
+		// Imprimir los títulos con numeros
+		cout << "*PELICULAS*" << endl;
+		int index = 1;
+		std::list<std::string>::iterator it;
+		for (it = titulos.begin(); it != titulos.end(); ++it) {
+			cout << index << ". " << *it << endl;
+			index++;
+		}
+
+		// Pedir al usuario que seleccione un número
+		int seleccion;
+		cout << "Elige la pelicula usando numeros: " << endl;
+		cin >> seleccion;
+
+		// Obtener la película seleccionada en formado clase
+		it = titulos.begin();
+		advance(it, seleccion - 1);
+
+		// Le seteo a mi icon el titulo de la pelicula seleccionada (no la clase, solo la string del titulo)
+		iconAltaFuncion->setTi(*it);
+
+		// Listo los cines
+		list<DtCine> cines = iconAltaFuncion->listarCines();
+		
+		// Imprimo los cines. el usuario mas tarde eligira el cine usando la ID del mismo
+		cout << "*CINES*" << endl;
+		index = 1;
+		std::list<DtCine>::iterator itCines;
+		for (itCines = cines.begin(); itCines != cines.end(); ++itCines) {
+			cout << "ID:  " << itCines->getId();
+			cout << " | Direccion: " << itCines->getDireccion().getCalle() << " " << itCines->getDireccion().getNumero() << endl;  // Asumiendo que DtCine tiene getNombre()
+			index++;
+		}
+		cout << "Elige el cine usando numeros: " << endl;
+		cin >> seleccion;
+
+		// setea el id del cine que eligio el usuario como una int en el controlador
+		iconAltaFuncion->setIdC(seleccion);
+
+		// le doy a mi usuario todas las salas del cine que eligio antes para que elija una de ellas
+		list<DtSala> salas = iconAltaFuncion->listarSalasDeCine();
+
+		// itero en un for loop imprimiendo las salas
+		cout << "*SALAS*" << endl;
+		index = 1;
+		list<DtSala>::iterator itSalas;
+		for(itSalas = salas.begin(); itSalas != salas.end(); ++itSalas) {
+			cout << "ID: " << itSalas->getId() << endl;
+			cout << "Capacidad restante: " << itSalas->getCapacidad() << endl;
+			index++;
+		}
+		cout << "Elige la sala usando numeros: " << endl;
+		cin >> seleccion;
+
+		// ahora que mi usuario escogio una sala, seteo la variable de la sala dentro del controlador para usarla mas tarde
+		iconAltaFuncion->setIdS(seleccion);
+
+		// fragmento de codigo que le pide a mi usuario fecha y hora y usa eso para armar esos dos DT.
+		// tras eso ambos Dt se ponen adentro de las variables de la clase controlador
+		int anio;
+		int mes;
+		int dia;
+		cout << "Elige el anio para la funcion: ";
+		cin >> anio;
+		cout << endl << "Elige el mes para la funcion: ";
+		cin >> mes;
+		cout << endl << "Elige el dia para la funcion: ";
+		cin >> dia;
+		cout << endl << "DATOS INGRESADOS: | ANIO: " << anio << " | MES: " << mes << " | DIA: " << dia << endl;
+		DtFecha dtFecha(dia, mes, anio);
+
+		string horaComienzo;
+		string horaFin;
+		cout << "Elige a que hora comienza la funcion: ";
+		cin >> horaComienzo;
+		cout << "Elige a que hora termina la funcion: ";
+		cin >> horaFin;
+		cout << endl << "DATOS INGRESADOS: | HORA DE COMIENZO: " << horaComienzo  << " | HORA DE FINALIZACION: " << horaFin << endl;
+		DtHorario dtHorario(horaComienzo, horaFin);
+
+		iconAltaFuncion->setDtFecha(dtFecha);
+		iconAltaFuncion->setDtHorario(dtHorario);
+
+		// ahora se llama a la funcion final para poner Funciona adentro de la sala adentro del cine
+		iconAltaFuncion->agregarFuncionASala();
+
+		//Pregunti si el usuario quiere continuar
+		int respuesta;
+		cout << "Desea agregar otra funcion? (Si: 1 | No: 0)" << endl;
+		cin >> respuesta;
+		if(respuesta == 0){
+			continuar = false;
+		}
+	}
+}
+
 //CASO 4 (IMPLEMENTACION)
 void altaPelicula(){
     //system("clear");
+	cin.ignore();
 	cout <<"_____________________________________________" <<endl;
 	cout <<"______ALTA__PELICULA_______"<< endl;
 	string titulo, sinopsis, poster;
 	float puntaje;
 	cout << "TITULO: ";
-	cin >> titulo;
+	getline(cin,titulo);
 	cout << endl << "SINOPSIS: ";
-	cin >> sinopsis;
+	getline(cin,sinopsis);
 	cout << endl << "POSTER: ";
-	cin >> poster;
+	getline(cin,poster);
 
 	puntaje = 0;
 	iconAltaPelicula->altaPelicula(titulo, sinopsis, puntaje, poster);
+}
+
+void eliminarPelicula(){
+
+	cout <<"_____________________________________________" <<endl;
+	cout <<"______ELIMINAR__PELICULA_______"<< endl;
+	
+	string titulo;
+	
+	try{
+		iconEliminarPelicula->listarPeliculas();
+
+		cout << "Pelicula a eliminar: " << endl;
+		getline(cin,titulo);
+
+		if(titulo != "c"){
+			cout << titulo << endl;
+			iconEliminarPelicula->eliminarPelicula(titulo);
+		}else{
+			cout << "Operacion cancelada" << endl;
+		}
+	}catch(const runtime_error& e){
+		cout << e.what() << endl;	
+	}
+
+	pausarPantalla();
 }
 
 //CASO 7 (IMPLEMENTACION)
@@ -271,6 +412,58 @@ void crearReserva(){
 
 }
 
+//CASO 11 (IMPLEMENTACION)
+void comentarPelicula() {
+
+	cin.ignore();
+
+    cout << "_____________________________________________" << endl;
+    cout << "_____________COMENTAR__PELICULA____________" << endl;
+
+    string titulo, comentario, linea;
+    int indiceComentario = -1;
+
+    cout << "Peliculas disponibles." << endl;
+    // Muestro las películas
+    vector<DtPelicula> peliculas = iconComentarPelicula->listarPeliculas();
+    for (int i = 0; i < peliculas.size(); i++) {
+        cout << "-" << peliculas[i].getTitulo() << endl;
+    }
+
+    cout << "\n" << "Titulo de pelicula a comentar: " << endl;
+    getline(cin, titulo);  // Lee línea completa sin problemas
+
+    vector<DtComentario> comentarios = iconComentarPelicula->listarComentarios(titulo);
+
+    int eleccion;
+    cout << "1) Nuevo Comentario" << endl;
+    cout << "2) Responder comentario" << endl;
+
+    getline(cin, linea);
+	eleccion = stoi(linea);
+
+    if (eleccion == 2) {
+        if (comentarios.size() > 0) {
+            for (int i = 0; i < comentarios.size(); i++) {
+                cout << i << ") " << comentarios[i].getTexto() << endl;
+            }
+            cout << "Seleccione comentario a responder: " << endl;
+            getline(cin, linea);
+			indiceComentario = stoi(linea);
+		}
+        else {
+            cout << "No hay comentarios." << endl;
+        }
+    }
+
+    cout << "Comentario: " << endl;
+    getline(cin, comentario);  // Ya buffer limpio, no hay problema
+
+    iconComentarPelicula->comentarPelicula(titulo, comentario, indiceComentario);
+
+    pausarPantalla();
+}
+
 // MENU
 void menuLogin(){
     	//system("clear");
@@ -287,12 +480,14 @@ void menu(){
 		//system("clear");
 		cout <<"_____________________________________________" <<endl;
 		cout <<"____________CINE____________"<< endl;
-		cout <<"1. Registrar Pelicula"<<endl;
+		cout <<"1. Alta Pelicula"<<endl;
 		cout <<"2. Ver Peliculas"<<endl;
-		cout <<"3. Cerrar Sesion"<<endl;
-		cout <<"4. Alta Pelicula (IMPLEMENTADA SOLO CON DESBUGUEO)" << endl;
-		cout <<"5. Alta Cine" << endl;
-		cout <<"7. Crear Reserva"<<endl;
+		cout <<"3. Eliminar pelicula"<<endl;
+		cout <<"4. Alta Cine" << endl;
+		cout <<"5. Crear Reserva" << endl;
+		cout <<"6. Comentar Pelicula" << endl;
+		cout <<"7. Alta Funcion" << endl;
+		cout <<"0. Cerrar Sesion" << endl;
 		cout <<"_____________________________________________" <<endl;
 		cout <<"OPCION: ";
 }
@@ -304,6 +499,9 @@ int main(){
     iconAltaPelicula = fabrica->getIControladorAltaPelicula();
 	iconAltaCine = fabrica->getIControladorAltaCine();
 	iconCrearReserva = fabrica->getIControladorCrearReserva();
+	iconEliminarPelicula = fabrica->getIControladorEliminarPelicula();
+	iconComentarPelicula = fabrica->getIControladorComentarPelicula();
+	iconAltaFuncion = fabrica->getIControladorAltaFuncion();
 	int opcion, opc;
     do{
 		menuLogin();
@@ -316,23 +514,26 @@ int main(){
 						menu();
 						cin >> opc;
 						switch(opc){
+							case 0: cerrarSesion();
+								break;
 							case 1: altaPelicula();
 								break;
 							case 2: verPeliculas();
 								break;
-							case 3: cerrarSesion();
+							case 3: eliminarPelicula();
 								break;
-							case 4: altaPelicula();
+							case 4: altaCine();
 								break;
-							case 5: altaCine();
+							case 5: crearReserva();
 								break;
-							case 7: crearReserva();
+							case 6: comentarPelicula();
 								break;
-							case 8: 
+							case 7: altaFuncion();
+								break;
 							default: cout << "Opcion no valida. Intente nuevamente." << endl;
 								break;
 						}
-					}while(opc != 3);
+					}while(opc != 0);
 					
 				}
 				break;
@@ -357,11 +558,15 @@ void pausarPantalla(){
 }
 
 //OPERACIONES DE DESBUGUEO
-void verPeliculas(){	//FUNCION DE PRUEBA PARA COMPROBAR ALTAPELICULA  
-	ManejadorPelicula* manejador;
+void verPeliculas(){
 
-	manejador = manejador->getInstancia();
-	manejador->verPeliculas();
+	try{
+		iconEliminarPelicula->listarPeliculas();
+	}catch(const runtime_error& e){
+		cout << e.what() << endl;
+	}
+
 	pausarPantalla();
 }
+
 					

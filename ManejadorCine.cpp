@@ -83,4 +83,12 @@ void ManejadorCine::eliminarPeliculaDeCines(string titulo){
         iterator->second->eliminarPeliculaDeFunciones(titulo);}
 }
 
+std::vector<Sala*> ManejadorCine::obtenerSalasDeCine(int id) {
+    std::map<int, Cine*>::iterator it = this->cines.find(id);
+    if (it != this->cines.end()) {
+        return it->second->obtenerSalas();
+    }
+    return {};
+}
+
 ManejadorCine::~ManejadorCine(){}

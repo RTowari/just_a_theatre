@@ -1,7 +1,7 @@
 #include "Funcion.h"
 
 Funcion::Funcion(){}
-Funcion::Funcion(int id, DtFecha* f, DtHorario* h){
+Funcion::Funcion(int id, DtFecha f, DtHorario h){
     this->id = id;
     this->fecha = f;
     this->horario = h;
@@ -16,11 +16,11 @@ void Funcion::setId(int id){
     this->id = id;
 }
 
-void Funcion::setFecha(DtFecha* f){
+void Funcion::setFecha(DtFecha f){
     this->fecha = f;
 }
 
-void Funcion::setHorario(DtHorario* h){
+void Funcion::setHorario(DtHorario h){
     this->horario = h;
 }
 
@@ -28,11 +28,11 @@ int Funcion::getId(){
     return this->id;
 }
 
-DtFecha* Funcion::getFecha(){
+DtFecha Funcion::getFecha(){
     return this->fecha;
 }
 
-DtHorario* Funcion::getHorario(){
+DtHorario Funcion::getHorario(){
     return this->horario;
 }
 
@@ -50,4 +50,8 @@ Pelicula* Funcion::getPelicula(){       //para cu eliminarPelicula
 
 void Funcion::eliminarPelicula(){       //para cu eliminarPelicula
     this->pelicula = NULL;
+}
+
+void Funcion::agregarPelicula(Pelicula* pelicula){
+    this->pelicula=pelicula;
 }
