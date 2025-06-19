@@ -80,7 +80,18 @@ void ManejadorCine::eliminarCine(int id){
 void ManejadorCine::eliminarPeliculaDeCines(string titulo){
     for (map<int,Cine*>::iterator iterator=cines.begin(); iterator!=cines.end(); ++iterator){
         iterator->second->eliminarPeliculaCine(titulo);
-        iterator->second->eliminarPeliculaDeFunciones(titulo);}
+        iterator->second->eliminarPeliculaDeFunciones(titulo);
+    }
+}
+
+bool ManejadorCine::existePelicula(string titulo){
+    for (map<int,Cine*>::iterator iterator=cines.begin(); iterator!=cines.end(); ++iterator){
+        bool peliculaEnCine = iterator->second->existePelicula(titulo);
+        if(peliculaEnCine == true){
+            return true;
+        }
+    }
+    return false;
 }
 
 std::vector<Sala*> ManejadorCine::obtenerSalasDeCine(int id) {

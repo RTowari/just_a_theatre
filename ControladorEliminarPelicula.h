@@ -7,7 +7,7 @@
 class ControladorEliminarPelicula : public IControladorEliminarPelicula{
 
     public:
-        void listarPeliculas();
+        vector<DtPelicula> listarPeliculas();
         void eliminarPelicula(string titulo);
 };
 

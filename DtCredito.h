@@ -1,26 +1,24 @@
-#ifndef DT_CREDITO_H
-#define DT_CREDITO_H
+#ifndef DTCREDITO_H
+#define DTCREDITO_H
+
+#include "DtPago.h"
 #include <string>
+
 using namespace std;
 
-class DtCredito{
+class DtCredito : public DtPago {
 private:
     string financiera;
-    float porcentajeDescuento;
-    float montoBase;
+    float descuento;
 
 public:
     DtCredito();
-    DtCredito(string financiera, float porcentajeDescuento, float montoBase);
+    DtCredito(int precioBase, int cantidadEntradas, int total, string financiera, float descuento);
 
     string getFinanciera();
-    void setFinanciera(string financiera);
+    float getDescuento();
 
-    float getPorcentajeDescuento();
-    void setPorcentajeDescuento(float porcentajeDescuento);
-
-    float getMontoBase();
-    void setMontoBase(float montoBase);
+    DtPago* getDt() const override; 
 };
 
 #endif

@@ -15,3 +15,5 @@ string DtUsuario::getContrasenia(){
 string DtUsuario::getUrlFoto(){
     return this->urlFoto;
 }
+
+DtUsuario::~DtUsuario(){}

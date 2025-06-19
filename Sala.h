@@ -31,6 +31,13 @@ public:
     
     //para cu AltaFuncion
     DtSala getDt();
+    void agregarFuncion(Funcion* funcion);
+
+    //cu Crear Reserva
+    //cu Crear Reserva
+    map<int,Funcion*> obtenerFunciones(); 
+    DtSala obtenerSalaPorPelicula(string titulo);
+    DtSala obtenerSalaPorPeliculaYFecha(string titulo);
 };
 
 #endif

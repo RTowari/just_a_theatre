@@ -33,6 +33,8 @@ public:
     void eliminarPeliculaDeCines(string titulo);
     vector<Sala*> obtenerSalasDeCine(int id);
     virtual ~ManejadorCine();
+
+    bool existePelicula(string titulo);                                      // Para CU AltaFuncion
 };
 
 #endif 

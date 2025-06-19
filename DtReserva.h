@@ -1,23 +1,23 @@
 #ifndef DTRESERVA_H
 #define DTRESERVA_H
 
-using namespace std;
+#include "DtPago.h"
 
 class DtReserva {
-    private:
-        int IdReserva;
-        int cantEntradas;
-        float costo;
-    
-        public:
-            DtReserva();
-            DtReserva(int, int, float);
+private:
+    int idReserva;
+    DtPago* pago;
 
-            int getIdReserva();
-            int getCosto();
-            int getCantEntradas();
+public:
+    DtReserva();
+    DtReserva(int idReserva, DtPago* pago);
+    DtReserva(const DtReserva& other);
+    ~DtReserva();
 
-            ~DtReserva();
+    DtReserva& operator=(const DtReserva& other);
+
+    int getIdReserva();
+    DtPago* getPago();
 };
 
 #endif

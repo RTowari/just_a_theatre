@@ -8,7 +8,7 @@ using namespace std;
 class IControladorEliminarPelicula{
 
     public:
-        virtual void listarPeliculas()=0;
+        virtual vector<DtPelicula> listarPeliculas()=0;
         virtual void eliminarPelicula(string titulo)=0;
 
 };

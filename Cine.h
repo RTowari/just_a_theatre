@@ -27,10 +27,6 @@ public:
     Cine(int, DtDireccion);
     ~Cine();
 
-    // agregado para altafuncion
-    DtCine getDt();
-    Sala* obtenerSalaPorId(int id);
-
     //no permito setear ID esto lo controla y autogenera el manejador de cines
     void setDireccion(DtDireccion dtDireccion);
 
@@ -48,6 +44,15 @@ public:
     void eliminarPeliculaCine(string titulo);               //cu eliminarPelicula
     void eliminarPeliculaDeFunciones(string titulo);        //cu eliminarPelicula
     void mostrarInformacion() const; 
+
+    //cu AltaFuncion
+    bool existePelicula(string titulo);
+    DtCine getDt();
+    Sala* obtenerSalaPorId(int id);         
+
+    // cu crearReserva
+    list<DtSala> obtenerSalasPorPelicula(string);
+    list <DtSala> obtenerSalasPorPeliculaYFecha(string);
 };
 
 #endif

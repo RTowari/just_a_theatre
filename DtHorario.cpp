@@ -1,27 +1,25 @@
 #include "DtHorario.h"
 
-DtHorario::DtHorario() {
-    horaComienzo = "";
-    horaFin = "";
+DtHorario::DtHorario() {}
+
+DtHorario::DtHorario(int mComienzo, int hComienzo, int mFin, int hFin) {
+    this->mComienzo = mComienzo;
+    this->hComienzo = hComienzo;
+    this->mFin = mFin;
+    this->hFin = hFin;
 }
 
-DtHorario::DtHorario(string comienzo, string fin) {
-    horaComienzo = comienzo;
-    horaFin = fin;
+
+int DtHorario::getHoraComienzo(){
+    return this->hComienzo;
+}
+int DtHorario::getMinutoComienzo(){
+    return this->mComienzo;
 }
 
-void DtHorario::setHoraComienzo(string comienzo) {
-    horaComienzo = comienzo;
+int DtHorario::getHoraFin(){
+    return this->hFin;
 }
-
-void DtHorario::setHoraFin(string fin) {
-    horaFin = fin;
-}
-
-string DtHorario::getHoraComienzo() {
-    return horaComienzo;
-}
-
-string DtHorario::getHoraFin() {
-    return horaFin;
+int DtHorario::getMinutoFin(){
+    return this->mFin;
 }

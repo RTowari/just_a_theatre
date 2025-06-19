@@ -7,17 +7,19 @@ using namespace std;
 
 class DtHorario{
     private:
-        string horaComienzo;
-        string horaFin;
+        int mComienzo;
+        int hComienzo;
+        int mFin;
+        int hFin;
     public:
         DtHorario();
-        DtHorario(string,string);
+        DtHorario(int, int, int, int);
 
-        void setHoraComienzo(string);
-        void setHoraFin(string);
+        int getHoraComienzo();
+        int getMinutoComienzo();
 
-        string getHoraComienzo();
-        string getHoraFin();
+        int getHoraFin();
+        int getMinutoFin();
 };
 
 #endif

@@ -23,7 +23,11 @@ class ManejadorFuncion{
         void eliminarFuncion(int);
         void verFunciones();
         int generarNuevoId();
+        void eliminarFuncionPorTitulo(string titulo);      // para cu EliminarPelicula
+        string getPeliculaTitulo();                         // para cu EliminarPelicula 
         virtual ~ManejadorFuncion();
+
+        std::list<Funcion*> getFuncionesPorTitulo(std::string titulo);
 };
 
 #endif

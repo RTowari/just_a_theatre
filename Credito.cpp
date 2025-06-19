@@ -1,26 +1,25 @@
 #include "Credito.h"
-#include <string>
+#include "DtPago.h"
+#include "DtCredito.h"
 
+Credito::Credito(string financiera, float descuento, int cantidadEntradas)
+    : Pago(PRECIO_BASE, cantidadEntradas), financiera(financiera), descuento(descuento) {}
 
-Credito::Credito(string financiera, float porcentajeDescuento, float montoBase) : Pago(montoBase), financiera(financiera), porcentajeDescuento(porcentajeDescuento) {}
-
-float Credito::calcularMontoFinal() {
-    
-    return montoBase * (1 - porcentajeDescuento / 100.0f);
+int Credito::procesarPago() {
+    float precioConDescuento = precioBase * cantidadEntradas * (1 - descuento);
+    total = static_cast<int>(precioConDescuento);
+    return total;
 }
 
 string Credito::getFinanciera() {
     return financiera;
 }
 
-void Credito::setFinanciera(string financiera) {
-    this->financiera = financiera;
+float Credito::getDescuento() {
+    return descuento;
 }
 
-float Credito::getPorcentajeDescuento() {
-    return porcentajeDescuento;
-}
-
-void Credito::setPorcentajeDescuento(float porcentajeDescuento) {
-    this->porcentajeDescuento = porcentajeDescuento;
+DtPago* Credito::getDt() {
+    // Assuming Credito has these members: precioBase, cantidadEntradas, total, financiera, descuento
+    return new DtCredito(precioBase, cantidadEntradas, total, financiera, descuento);
 }

@@ -1,19 +1,16 @@
 #include "DtDebito.h"
-#include <string>
 
+DtDebito::DtDebito() {}
 
-DtDebito::DtDebito() : banco(""), montoBase(0.0f){}
-
-DtDebito::DtDebito(string banco, float montoBase) : banco(banco), montoBase(montoBase){}
-
-string DtDebito::getBanco(){
-    return banco;
-}
-
-void DtDebito::setBanco(string banco){
+DtDebito::DtDebito(int precioBase, int cantidadEntradas, int total, string banco)
+    : DtPago(precioBase, cantidadEntradas, total) {
     this->banco = banco;
 }
 
-float DtDebito::getMontoBase(){
-    return montoBase;
+string DtDebito::getBanco() {
+    return this->banco;
+}
+
+DtPago* DtDebito::getDt() const {
+    return new DtDebito(precioBase, cantidadEntradas, total, banco);
 }

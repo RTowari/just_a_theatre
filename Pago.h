@@ -1,13 +1,26 @@
 #ifndef PAGO_H
 #define PAGO_H
 
+#include "PrecioBase.h"
+#include "DtPago.h"
+
+#include <string>
+
+using namespace std;
+
 class Pago {
     protected:
-        float montoBase;
+        const int precioBase;
+        int cantidadEntradas;
+        int total;
+
     public:
-        Pago();
-        Pago(float montoBase);
-        virtual float calcularMontoFinal() = 0;
+        Pago(int precioBase = PRECIO_BASE, int cantidadEntradas = 0);  // Now includes cantidadEntradas
+        virtual int procesarPago() = 0;
+        int getPrecioBase();
+        int getTotal();
+        virtual DtPago* getDt()= 0;
         virtual ~Pago();
 };
+
 #endif

@@ -1,32 +1,29 @@
 #include "DtCredito.h"
-#include <string>
 
+DtCredito::DtCredito() {}
 
-DtCredito::DtCredito() : financiera(""), porcentajeDescuento(0.0f), montoBase(0.0f){}
-
-DtCredito::DtCredito(std::string financiera, float porcentajeDescuento, float montoBase)
-    : financiera(financiera), porcentajeDescuento(porcentajeDescuento), montoBase(montoBase){}
-
-string DtCredito::getFinanciera(){
-    return financiera;
-}
-
-void DtCredito::setFinanciera(string financiera){
+DtCredito::DtCredito(int precioBase, int cantidadEntradas, int total, string financiera, float descuento)
+    : DtPago(precioBase, cantidadEntradas, total) {
     this->financiera = financiera;
+    this->descuento = descuento;
 }
 
-float DtCredito::getPorcentajeDescuento(){
-    return porcentajeDescuento;
+string DtCredito::getFinanciera() {
+    return this->financiera;
 }
 
-void DtCredito::setPorcentajeDescuento(float porcentajeDescuento) {
-    this->porcentajeDescuento = porcentajeDescuento;
+float DtCredito::getDescuento() {
+    return this->descuento;
 }
 
-float DtCredito::getMontoBase(){
-    return montoBase;
+// Credito.cpp
+DtPago* DtCredito::getDt() const {
+    return new DtCredito(
+        this->precioBase,         // int precioBase
+        this->cantidadEntradas,   // int cantidadEntradas
+        this->total,              // int total
+        this->financiera,         // string financiera
+        this->descuento           // float descuento
+    );
 }
 
-void DtCredito::setMontoBase(float montoBase){
-    this->montoBase = montoBase;
-}

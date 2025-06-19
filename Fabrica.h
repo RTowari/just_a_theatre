@@ -9,6 +9,8 @@
 #include "IControladorEliminarPelicula.h"
 #include "IControladorComentarPelicula.h"
 #include "IControladorAltaFuncion.h"
+#include "IControladorPuntuarPelicula.h"
+#include "IControladorVerReserva.h"
 
 class Fabrica{
     private:
@@ -31,7 +33,11 @@ class Fabrica{
 
         IControladorComentarPelicula* getIControladorComentarPelicula();
 
+        IControladorPuntuarPelicula* getIControladorPuntuarPelicula();
+
         IControladorAltaFuncion* getIControladorAltaFuncion();
+
+        IControladorVerReserva* getIControladorVerReserva();
 
         ~Fabrica();
 

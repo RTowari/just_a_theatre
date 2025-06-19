@@ -5,28 +5,31 @@
 //#include "DtHorario.h"
 
 #include "Pago.h"
+#include "Usuario.h"
 
 using namespace std;
 
 class Reserva{
     private:
-        float costo;
-        int cantEntradas;
         int IdReserva;
         Pago* mePago;
+        Usuario* usuario;
 
     public:
         Reserva();
-        Reserva(int, int, float, Pago*);
+        Reserva(int, Pago*, Usuario*);
         ~Reserva();
 
-        void setIdReserva(int);
-        void setCosto(float);
-        void setCantEntradas(int);
 
+        void setIdReserva(int);
+        void setUsuario(Usuario*);
+        void setPago(Pago*);
+
+        Pago* getPago();
+        Usuario* getUsuario();
         int getIdReserva();
-        float getCosto();
-        int getCantEntradas();
+
+
 };
 
 #endif

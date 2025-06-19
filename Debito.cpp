@@ -1,18 +1,18 @@
-#include "Debito.h"             
-#include <string>
+#include "Debito.h"
 
-Debito::Debito() : Pago(0.0f), banco(""){}
+Debito::Debito(string banco, int cantidadEntradas)
+    : Pago(PRECIO_BASE, cantidadEntradas), banco(banco) {}
 
-Debito::Debito(string banco, float montoBase) : Pago (montoBase), banco(banco){}
-
-float Debito::calcularMontoFinal(){
-    return montoBase;
+int Debito::procesarPago() {
+    total = precioBase * cantidadEntradas;  // Sin descuento
+    return total;
 }
 
-string Debito::getBanco(){
+string Debito::getBanco() {
     return banco;
 }
 
-void Debito::setBanco(string banco){
-    this->banco = banco;
+DtPago* Debito::getDt() {
+
+    return new DtDebito(precioBase, cantidadEntradas, total, banco);
 }

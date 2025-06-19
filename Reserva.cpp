@@ -3,12 +3,10 @@
 #include "Usuario.h"
 
 Reserva::Reserva(){}
-Reserva::Reserva(int IdReserva, int cantEntradas, float costo, Pago* mePago) {
+Reserva::Reserva(int IdReserva, Pago* mePago, Usuario* usuario) {
     this->IdReserva = IdReserva;
-    this->cantEntradas = cantEntradas;
-    this->costo = costo;
     this->mePago = mePago;
-
+    this->usuario = usuario;
 };
 
 int Reserva::getIdReserva(){
@@ -19,23 +17,20 @@ void Reserva::setIdReserva(int IdReserva)
     this->IdReserva = IdReserva;
 }
 
-int Reserva::getCantEntradas(){
-    return this->cantEntradas;
+Usuario* Reserva::getUsuario(){
+    return this->usuario;
 }
-void Reserva::setCantEntradas(int cantEntradas){
-    this->cantEntradas = cantEntradas;
-}
-
-float Reserva::getCosto(){
-    return this->costo;
-}
-void Reserva::setCosto(float){
-    this-> costo = costo;
+void Reserva::setUsuario(Usuario*){
+    this->usuario=usuario;
 }
 
+Pago* Reserva::getPago(){
+    return this->mePago;
+}
+void Reserva::setPago(Pago* pago){
+    this->mePago=mePago;
+}
 
-
-
-
-
-Reserva::~Reserva() {}
+Reserva::~Reserva() {
+    delete mePago;  // free allocated payment object
+}

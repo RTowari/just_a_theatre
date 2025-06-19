@@ -63,7 +63,36 @@ int ManejadorFuncion::generarNuevoId(){
     return maxIdIt->first + 1;
 }
 
+// dado el titulo de uuna pelicula, itero a traves de cada funcion eliminando los titulos
+void ManejadorFuncion::eliminarFuncionPorTitulo(string titulo){
+    for (map<int, Funcion*>::iterator it = funciones.begin(); it != funciones.end();) {
+        if (it->second->getPeliculaTitulo() == titulo) {
+            delete it->second; // Free memory
+            it = funciones.erase(it); // Remove entry and update iterator
+        } else {
+            ++it;
+        }
+    }
+}
+
+// dado el titulo de una pelicuula, itero a traves de cada funcion buscado el titulo que quiero
+std::list<Funcion*> ManejadorFuncion::getFuncionesPorTitulo(std::string titulo){
+    std::list<Funcion*> funcion_ptr_list;
+
+    for (map<int, Funcion*>::iterator itFuncion = funciones.begin(); itFuncion != funciones.end(); ++itFuncion){
+        // si el titulo que estoy trayendo es uno que tiene la funcion, metola funcion en la lista
+        if (itFuncion->second->getPelicula()->getTitulo() == titulo){
+            funcion_ptr_list.push_back(itFuncion->second);
+        }
+    }
+
+
+    return funcion_ptr_list;
+}
+
+
 ManejadorFuncion::~ManejadorFuncion(){}
+
 
 
 

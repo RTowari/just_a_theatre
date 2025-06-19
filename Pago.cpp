@@ -1,14 +1,14 @@
 #include "Pago.h"
 
+Pago::Pago(int precioBase, int cantidadEntradas)
+    : precioBase(precioBase), cantidadEntradas(cantidadEntradas), total(0) {}
 
-#include <iostream>
-#include <string>
-using namespace std;
+int Pago::getPrecioBase() {
+    return precioBase;
+}
 
-Pago::Pago() {montoBase = 0.0f;}
-            
-Pago::Pago(float montoBase){
-    this->montoBase = montoBase;
+int Pago::getTotal() {
+    return total;
 }
 
 Pago::~Pago() {}

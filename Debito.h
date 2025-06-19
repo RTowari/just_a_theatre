@@ -2,21 +2,20 @@
 #define DEBITO_H
 
 #include "Pago.h"
-#include <string> 
+#include <string>
+#include "DtDebito.h"
+#include "DtPago.h"
 
 using namespace std;
 
-class Debito : public Pago{
+class Debito : public Pago {
 private:
     string banco;
-
+    virtual DtPago* getDt() override;
 public:
-    Debito();
-    Debito(string banco, float montoBase);
-    float calcularMontoFinal();
-
+    Debito(string banco, int cantidadEntradas);
+    virtual int procesarPago() override;
     string getBanco();
-    void setBanco(string banco);
 };
 
 #endif

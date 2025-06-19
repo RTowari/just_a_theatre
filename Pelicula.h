@@ -3,7 +3,8 @@
 
 #include "DtPelicula.h"
 #include "Comentario.h"
-
+#include "Puntaje.h"
+#include "Usuario.h"
 #include <vector>
 #include <string>
 
@@ -16,6 +17,7 @@ private:
     float puntajePromedio;
     string poster;
     vector<Comentario*> comentarios;
+    vector<Puntaje*> puntajes;
     
 public:
     Pelicula();
@@ -34,8 +36,11 @@ public:
 
     DtPelicula getDt();
     vector<Comentario*> getComentarios();
+    vector<Puntaje*> getPuntajes();
+    Puntaje* obtienePuntajeUsuario(string);
 
     void agregarComentario(Comentario*);
+    void agregarPuntaje(Usuario*, int);
 };
 
 #endif

@@ -2,6 +2,7 @@
 
 #include "ManejadorPelicula.h"
 #include "Pelicula.h"
+#include "Sesion.h"
 #include <iostream>
 
 vector<DtPelicula> ControladorComentarPelicula::listarPeliculas(){
@@ -16,13 +17,10 @@ vector<DtPelicula> ControladorComentarPelicula::listarPeliculas(){
     return DtPeliculas;
 }
 
-
 vector<DtComentario> ControladorComentarPelicula::listarComentarios(string titulo){
     
     Pelicula* p = ManejadorPelicula::getInstancia()->buscarPelicula(titulo);
 
-    cout << "TITULO: " << p->getTitulo() << endl;
-    
     vector<Comentario*> aux = p->getComentarios();
     vector<DtComentario> DtComentarios;    
   
@@ -36,13 +34,12 @@ vector<DtComentario> ControladorComentarPelicula::listarComentarios(string titul
 void ControladorComentarPelicula::comentarPelicula(string titulo, string textoComentario, int respondido){
 
     Pelicula* p = ManejadorPelicula::getInstancia()->buscarPelicula(titulo);
-    
-    Comentario* c = new Comentario();
-    
-    c->setTexto(textoComentario);
+    Usuario* u = Sesion::getInstancia()->getUsuario();
 
-    if(respondido > -1){
-        c->setComentarioRespondido(p->getComentarios()[respondido]);
+    Comentario* c = new Comentario(textoComentario, u);
+
+    if(respondido > -1){  //recibe un parametro que indica la posición del comentario en la colección, si es -1 es porque no responde.
+        c->setComentarioRespondido(p->getComentarios()[respondido]); 
     }
 
     p->agregarComentario(c);

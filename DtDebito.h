@@ -1,22 +1,22 @@
-#ifndef DT_DEBITO_H
-#define DT_DEBITO_H
+#ifndef DTDEBITO_H
+#define DTDEBITO_H
+
+#include "DtPago.h"
 #include <string>
+
 using namespace std;
 
-class DtDebito{
+class DtDebito : public DtPago {
 private:
     string banco;
-    float montoBase;
 
 public:
     DtDebito();
-    DtDebito(string banco, float montoBase);
+    DtDebito(int precioBase, int cantidadEntradas, int total, string banco);
 
-    std::string getBanco();
-    void setBanco(string banco);
+    string getBanco();
 
-    float getMontoBase();
-    void setMontoBase(float montoBase);
+    DtPago* getDt() const override;
 };
 
 #endif
