@@ -31,10 +31,13 @@ void Sala::eliminarPeliFuncion(string titulo) {
         Funcion* funcion = it->second;
         if (funcion != nullptr && funcion->getPelicula()->getTitulo() == titulo) {
             it = funciones.erase(it);  // borrar entrada y actualizar iterador
+            capacidad++; // aumenta la capacidad de la sala porque la funcion fue eliminada
         } else {
             ++it;  // avanzar iterador normalmente
         }
     }
+
+
 }
 
 //para cu altaFuncion

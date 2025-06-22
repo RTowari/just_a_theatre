@@ -10,17 +10,16 @@ using namespace std;
 class Comentario{
     private:
         string texto;
-        Usuario* usuario;   
         Comentario* comentarioRespondido;
+        Usuario* usuario;
     public:
         Comentario();
-        Comentario(string, Usuario*);
-        Comentario(string, Usuario*, Comentario*);
+        Comentario(string);
         ~Comentario();
         
         void setTexto(string);
         void setComentarioRespondido(Comentario*);
-        void setUsuario(Usuario* );
+        void setUsuario(Usuario*);
 
         string getTexto();
         Comentario* getComentarioRespondido();

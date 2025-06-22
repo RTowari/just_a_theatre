@@ -9,15 +9,15 @@ class DtComentario{
     private:
         string texto;
         string comentarioRespondido;
-
+        string nomUsuario;
     public:
         DtComentario();
-        DtComentario(string, string);
+        DtComentario(string, string, string);
         ~DtComentario();
 
         string getTexto();
         string getComentarioRespondido();
-
+        string getUsuario();
 };
 
 #endif

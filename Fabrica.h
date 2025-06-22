@@ -11,6 +11,10 @@
 #include "IControladorAltaFuncion.h"
 #include "IControladorPuntuarPelicula.h"
 #include "IControladorVerReserva.h"
+#include "IControladorVerInformacionPelicula.h"
+#include "IControladorVerComentariosyPuntajesdePelicula.h"
+#include "IControladorRelojLocal.h"
+#include "IControladorCargarDatos.h"
 
 class Fabrica{
     private:
@@ -38,6 +42,14 @@ class Fabrica{
         IControladorAltaFuncion* getIControladorAltaFuncion();
 
         IControladorVerReserva* getIControladorVerReserva();
+
+        IControladorVerInformacionPelicula* getIControladorVerInformacionPelicula();
+
+        IControladorVerComentariosyPuntajesdePelicula* getIControladorVerComentariosyPuntajesdePelicula();
+
+        IControladorRelojLocal* getIControladorRelojLocal();
+
+        IControladorCargarDatos* getIControladorCargarDatos();
 
         ~Fabrica();
 

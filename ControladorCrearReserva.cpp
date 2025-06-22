@@ -132,6 +132,7 @@ float ControladorCrearReserva::setPagoDebito(string entidad_financiera) {
 }  
 
 // esto crea la reserva y la guarda en la array de reservas en la funcion que el usuario eligio
+// esto crea la reserva y la guarda en la array de reservas en la funcion que el usuario eligio
 void ControladorCrearReserva::confirmarReserva(int funcionElegida, int salaElegida){
 
     if (this->pago == nullptr) {
@@ -145,16 +146,6 @@ void ControladorCrearReserva::confirmarReserva(int funcionElegida, int salaElegi
         throw std::runtime_error("[ERROR CATASTROFICO] Se esta intentado poner una reserva en una funcion que no existe");
     }
 
-    // tengo que reducir el total de asientos de la sala en donde voy a crear mi reserva
-    int salaCapacidad = ManejadorCine::getInstancia()->buscarCine(IdC)->obtenerSalaPorId(salaElegida)->getCapacidad();
-    if(salaCapacidad > totalDeAsientos){
-        throw std::runtime_error("[ERROR CATASTROFICO] Se intentaron comprar mas asientos de los que la sala permite");
-    }
-    else {
-        int capacidadSalaActual = ManejadorCine::getInstancia()->buscarCine(IdC)->obtenerSalaPorId(salaElegida)->getCapacidad();
-        capacidadSalaActual=capacidadSalaActual-totalDeAsientos;
-        ManejadorCine::getInstancia()->buscarCine(IdC)->obtenerSalaPorId(salaElegida)->setCapacidad(totalDeAsientos);
-    }
 
     // ahora creo mi reserva usando los datos que tengo y se lo paso a la funcion
     Reserva* nuevaReserva = new Reserva(ManejadorFuncion::getInstancia()->buscarFuncion(funcionElegida)->getTopeReserva(), this->pago, Sesion::getInstancia()->getUsuario());
@@ -166,9 +157,4 @@ void ControladorCrearReserva::confirmarReserva(int funcionElegida, int salaElegi
     // ahora pongo la reserva en la funcion. como la sala ya conoce esta funcion (por pointer), no tengo que pasar por las salas
     ManejadorFuncion::getInstancia()->buscarFuncion(funcionElegida)->agregarReserva(nuevaReserva);
 
-    
-
-
-
 }
-

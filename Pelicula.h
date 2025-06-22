@@ -38,6 +38,7 @@ public:
     vector<Comentario*> getComentarios();
     vector<Puntaje*> getPuntajes();
     Puntaje* obtienePuntajeUsuario(string);
+    float CalculaPuntajePromedio();
 
     void agregarComentario(Comentario*);
     void agregarPuntaje(Usuario*, int);

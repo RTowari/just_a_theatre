@@ -9,6 +9,10 @@
 #include "ControladorPuntuarPelicula.h"
 #include "ControladorAltaFuncion.h"
 #include "ControladorVerReserva.h"
+#include "ControladorVerInformacionPelicula.h"
+#include "ControladorVerComentariosyPuntajesdePelicula.h"
+#include "ControladorRelojLocal.h"
+#include "ControladorCargarDatos.h"
 
 Fabrica* Fabrica::instancia = NULL;
 
@@ -59,6 +63,23 @@ IControladorAltaFuncion* Fabrica::getIControladorAltaFuncion(){
 IControladorVerReserva* Fabrica::getIControladorVerReserva(){
     return new ControladorVerReserva();
 }
+
+IControladorVerInformacionPelicula* Fabrica::getIControladorVerInformacionPelicula(){
+    return new ControladorVerInformacionPelicula();
+}
+
+IControladorVerComentariosyPuntajesdePelicula* Fabrica::getIControladorVerComentariosyPuntajesdePelicula(){
+    return new ControladorVerComentariosyPuntajesdePelicula();
+}
+
+IControladorRelojLocal* Fabrica::getIControladorRelojLocal(){
+    return new ControladorRelojLocal();
+}
+
+IControladorCargarDatos* Fabrica::getIControladorCargarDatos(){
+    return new ControladorCargarDatos();
+}
+
 
 
 Fabrica::~Fabrica(){}

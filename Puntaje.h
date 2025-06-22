@@ -21,6 +21,8 @@ class Puntaje{
         void setUsuario(Usuario* );
         Usuario* getUsuario();
 
+        DtPuntaje getDt();
+
 };
 
 #endif

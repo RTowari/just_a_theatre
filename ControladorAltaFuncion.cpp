@@ -109,14 +109,21 @@ void ControladorAltaFuncion::agregarFuncionASala(){
     int idParaSala = manejadorF->generarNuevoId();
     // ahora puedo crear mi funcion, ya que tengo el id que necesito
     Funcion* nuevaFuncion = new Funcion(idParaSala, DtFecha(this->dtFecha), DtHorario(this->dtHorario));
+    
     // agrego mi funcion al manejador y a la sala
+    if (salaElegida->getCapacidad()==0){
+        throw std::runtime_error("[ERROR CATASTROFICO] Se esta intentado poner una funcion en una Sala llena");
+    }
     manejadorF->agregarFuncion(nuevaFuncion);
     salaElegida->agregarFuncion(nuevaFuncion);
+    // reduzco la capacidad de la sala
+    salaElegida->setCapacidad(salaElegida->getCapacidad()-1);
     
 
     // ahora tengo que agregar la pelicula a mi funcion, asi que le pido la pelicula al menejador pelicula
     // el titulo que usé para buscar la pelicula se lo pedi al usuario y esta almacenado en mi controlador
     Pelicula* pelicula = manejadorP->buscarPelicula(this->getTi());
+    
     // ahora que tengo mi pelicula por referencia, la pongo en la funcion y en el cine
     nuevaFuncion->agregarPelicula(pelicula);
     // antes de agregar la pelicula al cine me aseguro de que no exista

@@ -85,10 +85,23 @@ Puntaje* Pelicula::obtienePuntajeUsuario(string nickname)  {
     for (Puntaje* p : this->puntajes) {
         if (p != nullptr && p->getUsuario()!= nullptr) {
             if (p->getUsuario()->getNickname() == nickname) {
-                return p; // ¡Encontramos el puntaje
+                return p; // 
             }
         }
     }
     // Si el bucle termina y no encontramos ningún puntaje de un usuario con ese nickname, se devuelve nullptr
     return nullptr;
+}
+
+float Pelicula::CalculaPuntajePromedio() {
+    if (this->puntajes.empty()) {
+        return 0; // Si no hay puntajes, el promedio es 0
+    }
+
+    float sumaPuntajes = 0;
+    for (Puntaje* p : this->puntajes) {
+        sumaPuntajes += p->getPuntaje();
+    }
+
+    return sumaPuntajes / this->puntajes.size();
 }

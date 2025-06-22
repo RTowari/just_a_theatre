@@ -28,3 +28,9 @@ void Puntaje::setUsuario(Usuario* u) {
 Usuario* Puntaje::getUsuario(){
     return usuario;
 }
+
+DtPuntaje Puntaje::getDt() {
+    //llamo constructor DtUsuario
+    DtUsuario* dtU = new DtUsuario(this->usuario->getNickname(), this->usuario->getContrasenia(), this->usuario->getUrlFoto()); 
+    return DtPuntaje(this->puntaje, dtU);
+}
