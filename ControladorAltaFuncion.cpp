@@ -1,4 +1,5 @@
 #include "ControladorAltaFuncion.h"
+
 #include "ManejadorCine.h"
 #include "ManejadorFuncion.h"
 #include "ManejadorPelicula.h"
@@ -10,6 +11,7 @@
 #include "DtSala.h"
 #include "DtFecha.h"
 #include "DtHorario.h"
+#include "DtFuncion.h"
 
 #include <string>
 #include <map>
@@ -64,8 +66,8 @@ list<DtCine> ControladorAltaFuncion::listarCines(){
     // Ahora convierto cada cine en su forma Dt y lo pongo en una lista
     list<DtCine> lstDtCines;  // Lista para mis dt
     for (Cine* cine : lstCines) {
-        if (cine) {  // Ensure pointer is valid
-            DtCine dtCine(cine->getId(), cine->getDireccion());  // Assuming a DtCine constructor
+        if (cine) {  
+            DtCine dtCine(cine->getId(), cine->getDireccion());  
             lstDtCines.push_back(dtCine);
         }
     }
@@ -80,11 +82,26 @@ list<DtSala> ControladorAltaFuncion::listarSalasDeCine(){
 
     // el manejador de cine me da una lista de sus salas, dada la Id que eligio el usuario
     int IdC = this->getIdC();
-    vector<Sala*> salas = manejadorC->obtenerSalasDeCine(IdC);
-
+    vector<Sala*> salas = manejadorC->buscarCine(IdC)->obtenerSalas();
+        
+    // ahora pongo dt funciones adentro de dt salas
     list<DtSala> lstDtSalas;
     for(Sala* sala : salas) {
+        // a cada sala le pido sus funciones
+        std::map<int, Funcion*> funciones = sala->obtenerFunciones();
+        
+        // convierto la sala en un dt que no tiene la coleccion de funciones
         DtSala dtSala = sala->getDt();
+
+        // por cada funcion, agarro su dt y lo pusheo en el dt sala dt pusheo las funciones en formato dt
+        for(map<int, Funcion*>::iterator it = funciones.begin(); it != funciones.end(); ++it){
+            Funcion* funcion = it->second;
+
+
+            DtFuncion dtFuncion = funcion->getDt();
+            dtSala.agregarDtFuncion(dtFuncion);
+        }
+
         lstDtSalas.push_back(dtSala);
     }
 
@@ -107,17 +124,14 @@ void ControladorAltaFuncion::agregarFuncionASala(){
 
     // le pido al manejador funcion una Id que no exista en su sistema
     int idParaSala = manejadorF->generarNuevoId();
+
     // ahora puedo crear mi funcion, ya que tengo el id que necesito
     Funcion* nuevaFuncion = new Funcion(idParaSala, DtFecha(this->dtFecha), DtHorario(this->dtHorario));
     
     // agrego mi funcion al manejador y a la sala
-    if (salaElegida->getCapacidad()==0){
-        throw std::runtime_error("[ERROR CATASTROFICO] Se esta intentado poner una funcion en una Sala llena");
-    }
+
     manejadorF->agregarFuncion(nuevaFuncion);
     salaElegida->agregarFuncion(nuevaFuncion);
-    // reduzco la capacidad de la sala
-    salaElegida->setCapacidad(salaElegida->getCapacidad()-1);
     
 
     // ahora tengo que agregar la pelicula a mi funcion, asi que le pido la pelicula al menejador pelicula

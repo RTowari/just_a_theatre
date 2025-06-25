@@ -13,3 +13,22 @@
         - Se confirmo que iniciarSesion puede dar segmentation fault si el usuario pone un nickname incorrecto
         - Se terminó oficialmente iniciarSesion, cerrarSesion, altaCine, altaPelicula
         - Comenzó el trabajo con altaFuncion, eliminarPelicula y puntarPelicula y verReservas
+
+24/06/2025 
+        - Bug fix: se corrijió la capacidad.
+                Ahora la capacidad no se resta por ningun lado y se imprime el horario de las funciones en AltaFuncion
+        - CORRECCIONES HECHAS
+                - ManejadorSala
+                        - Tiene una list de salas
+                - ManejadorCine
+                        - Se elimino que ManejadorCine pueda crear salas
+                        - Se eliminaron los cerr y se cambiaron por runtime error. Cierran el programa del todo
+                        - El destructor ya no borra las salas. Si tenemos que borrarlas lo hacemos en el manejador
+                        - Todo en ManejadorCine relacionado con topeSalas fue eliminado
+                - Cine        
+                        - Habia un obtenerSalas en cine que retornaba objetos nuevos por alguna razon. Ahora retorna solo salas
+                - Cargador de datos
+                        - Añadi que el cargador de datos añada funciones
+                - Controlador
+                        - Las salas se crean en un for loop adentro del controlador usando new.
+                        - Se añaden al cine y se añaden al menajador sala

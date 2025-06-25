@@ -2,7 +2,6 @@
 #define MANEJADOR_CINE_H
 
 #include "Cine.h" 
-#include "Sala.h" 
 #include <map>    
 #include <list>   
 #include <string> 
@@ -16,25 +15,22 @@ private:
     map<int, Cine*> cines;
     // Atributo para la autogeneración de IDs de cine y sala.
     int ultimoIdCine;
-    int ultimoIdSala;
     // Constructor privado para el singleton.
     ManejadorCine();
-    // Método privado para generar un nuevo ID de sala.
-       int generarNuevoIdSala(); // 
+
 
 public:
     static ManejadorCine* getInstancia();
     list<Cine*> getCines();
     int getSiguienteIdCine();
-    Cine* buscarCine(int id);
-    void darDeAltaCine(Cine* cine, const vector<int>& capacidadesSalas);
+    void darDeAltaCine(Cine* cine);
     bool existeCine(int id);
     void eliminarCine(int id);
     void eliminarPeliculaDeCines(string titulo);
-    vector<Sala*> obtenerSalasDeCine(int id);
     virtual ~ManejadorCine();
 
     bool existePelicula(string titulo);                                      // Para CU AltaFuncion
+    Cine* buscarCine(int idCine);
 };
 
 #endif 

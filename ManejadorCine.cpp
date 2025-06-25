@@ -1,5 +1,4 @@
 #include "Cine.h"
-#include "Sala.h"
 #include <list>
 #include <map>   
 #include <string>
@@ -14,7 +13,6 @@ ManejadorCine* ManejadorCine::instancia = NULL;
 
 ManejadorCine::ManejadorCine(){
      this->ultimoIdCine=0;
-     this->ultimoIdSala=0;
 }
 
 ManejadorCine* ManejadorCine::getInstancia(){
@@ -25,10 +23,6 @@ ManejadorCine* ManejadorCine::getInstancia(){
 
 int ManejadorCine::getSiguienteIdCine(){
     return ++this -> ultimoIdCine;
-}
-
-int ManejadorCine::generarNuevoIdSala() { 
-    return ++this -> ultimoIdSala;
 }
 
 list<Cine*> ManejadorCine::getCines(){
@@ -43,22 +37,17 @@ Cine* ManejadorCine::buscarCine(int id){
     return it->second;
 }
 
-void ManejadorCine::darDeAltaCine(Cine* cine, const vector<int>& capacidadesSalas){
+void ManejadorCine::darDeAltaCine(Cine* cine){
     // Verificar si el Cine con el ID proporcionado ya existe en la colección del manejador.
     map<int,Cine*>::iterator it = this->cines.find(cine->getId());
+    
     if (it != this->cines.end()) {
-        throw std::invalid_argument("Error en darDeAltaCine: El Cine con ID " + std::to_string(cine->getId()) + " ya existe en el sistema.");
+        throw std::runtime_error("[ERROR CATASTROFICO] Se agrego un cine con una id que ya existe");
     }  
+    
     //  Añadir el objeto Cine a la colección interna del manejador.
-     cines.insert(std::pair<int,Cine*>(cine->getId(), cine)); 
-    //  Iterar sobre las capacidades proporcionadas y crear las Salas correspondientes.
-    for (int capacidad : capacidadesSalas) {
-        int nuevaIdSala = generarNuevoIdSala();
-        //    La Sala es construida con su ID y la capacidad.
-        Sala* nuevaSala = new Sala(nuevaIdSala, capacidad);
-        //    El método agregarSala de la clase Cine se encargará de añadirla a su array interno.
-        cine->agregarSala(nuevaSala);
-    }
+    cines.insert(std::pair<int,Cine*>(cine->getId(), cine)); 
+    
 }
 
 bool ManejadorCine::existeCine(int id){
@@ -67,13 +56,14 @@ bool ManejadorCine::existeCine(int id){
 }
 
 void ManejadorCine::eliminarCine(int id){
+   
     map<int,Cine*>::iterator it = this->cines.find(id);
     if (it != this->cines.end()) {
         // el destructor de Cine se encarga de liberar las Salas.
         delete it->second; // liberar la memoria del objeto Cine
         cines.erase(it); // eliminar la entrada del mapa
     } else {
-        throw invalid_argument("Error al eliminar cine: El cine con ID " + to_string(id) + " no existe.");
+        throw std::runtime_error("[ERROR CATASTROFICO] Se intento eliminar un cine con una Id que no existe");;
     }
 }
 
@@ -92,14 +82,6 @@ bool ManejadorCine::existePelicula(string titulo){
         }
     }
     return false;
-}
-
-std::vector<Sala*> ManejadorCine::obtenerSalasDeCine(int id) {
-    std::map<int, Cine*>::iterator it = this->cines.find(id);
-    if (it != this->cines.end()) {
-        return it->second->obtenerSalas();
-    }
-    return {};
 }
 
 ManejadorCine::~ManejadorCine(){}

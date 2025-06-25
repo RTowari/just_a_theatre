@@ -188,9 +188,10 @@ void altaPelicula(){
 	string titulo, sinopsis, poster;
 	float puntaje;
 	int eleccion;
-	
+	string linea;
+
+	cin.ignore();
 	do{
-		cin.ignore();
 		cout <<"_____________________________________________" <<endl;
 		cout <<"______ALTA__PELICULA_______"<< endl;
 		cout << "TITULO: " << endl;
@@ -202,7 +203,13 @@ void altaPelicula(){
 			cout << "La pelicula ya existe en el sistema" << endl;
 			cout << "1) Ingresar otra pelicula." << endl;
 			cout << "2) Salir" << endl;
-			cin >> eleccion;
+			getline(cin, linea);
+			eleccion = stoi(linea);
+
+			if(eleccion != 1 && eleccion != 2){
+				cout << "Opcion incorrecta, volviendo al menu.." << endl;
+				eleccion = 2;
+			}
 		}
 	}while(eleccion == 1); //se repite mientras el usuario quiera agregar una pelicula
 
@@ -261,7 +268,7 @@ void altaCine(){
     cin >> confirmacion;
     // Manejo de error para la entrada de confirmación
 	if (confirmacion < 0 || confirmacion > 1)
-		throw invalid_argument("\nERROR: Ingrese 1-Sí / 0-No");
+		throw invalid_argument("\nERROR: Ingrese 1-Si / 0-No");
     cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); // Limpiar buffer después de leer int
 
     if (confirmacion == 1) {// Confirmar si ingresó 1
@@ -289,7 +296,6 @@ void altaFuncion(){
 		// obtengo los titulos
 
 		std::list<std::string> titulos = iconCrearReserva->listarPeliculas();
-
 
 		// Imprimir los títulos con numeros
 		cout << "*PELICULAS*" << endl;
@@ -329,11 +335,13 @@ void altaFuncion(){
 
 		index = 1;
 		std::list<DtCine>::iterator itCines;
+		
 		for (itCines = cines.begin(); itCines != cines.end(); ++itCines) {
 			cout << "ID:  " << itCines->getId();
 			cout << " | Direccion: " << itCines->getDireccion().getCalle() << " " << itCines->getDireccion().getNumero() << endl;  // Asumiendo que DtCine tiene getNombre()
 			index++;
 		}
+		
 		cout << "Elige el cine usando numeros: " << endl;
 		cin >> seleccion;
 
@@ -349,13 +357,25 @@ void altaFuncion(){
 		list<DtSala>::iterator itSalas;
 
 		for(itSalas = salas.begin(); itSalas != salas.end(); ++itSalas) {
-			cout << "ID: " << itSalas->getId() << endl;
-			if(itSalas->getCapacidad() == 0){
-				cout << endl << "[ESTA SALA ESTA LLENA]" << endl;
-			}
-			else{
-				cout << "Capacidad restante: " << itSalas->getCapacidad() << endl;
-			}
+			cout << endl << "ID: " << itSalas->getId() << " | " << "Asientos: " << itSalas->getCapacidad() << endl;
+
+				// ahora hago un for loop para los dt de cada sala
+				std::map<int, DtFuncion> funciones = itSalas->getDtFunciones();
+				if(funciones.empty()){
+					cout << endl << "  Todavia no hay funciones para la sala " << "*" << itSalas->getId() << "*" << endl;
+				}
+				else {
+					for(map<int, DtFuncion>::iterator it = funciones.begin(); it != funciones.end(); ++it){
+						DtFuncion dtFuncion = it->second;
+
+						cout << endl << "  Funcion " << "*" << dtFuncion.getId() << "*" <<
+						" empieza " << dtFuncion.getHorario().getHoraComienzo() << ":" << dtFuncion.getHorario().getMinutoComienzo() <<
+						" y termina " << dtFuncion.getHorario().getHoraFin() <<  ":" << dtFuncion.getHorario().getMinutoFin() <<
+						" el " << dtFuncion.getFecha().getDia() << "/" << dtFuncion.getFecha().getMes() << "/" << dtFuncion.getFecha().getAnio() << endl;
+					}
+				}
+
+
 
 			index++;
 		}
@@ -440,6 +460,7 @@ void crearReserva(){
 
 		// usando el titulo listo los cines como Dt
 		int cineElegido = elegirCine(iconCrearReserva->listarCines());
+		
 		if(cineElegido == 0){
 			cout << endl << "No hay cines con el titulo pedido. Volviendo al menu..." << endl;
 			return;
@@ -717,7 +738,6 @@ void eliminarPelicula(){
 		cout << "Operacion cancelada." << endl;
 	}
 
-	pausarPantalla();
 }
 
 //CASO 10 (IMPLEMENTACION)
@@ -750,11 +770,11 @@ void puntuarPelicula() {
 	try {
 		int puntajeAnterior = iconPuntuarPelicula->obtienePuntajeUsuario(titulo);
 		if (puntajeAnterior > 0){//Usuario ya puntuo pelicula
-			cout << "\n¡Ya has puntuado esta película!" << endl;
+			cout << "\nYa has puntuado esta pelicula!" << endl;
 			cout << "Tu puntaje actual para '" << titulo << "' es: " << puntajeAnterior << endl;
 
 			int opcionModificar;
-			std::cout << "¿Deseas modificar tu puntaje? (1-Sí / 0-No): ";
+			std::cout << "¿Deseas modificar tu puntaje? (1-Si / 0-No): ";
 			cin >> opcionModificar;
 			cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 
@@ -839,7 +859,7 @@ void comentarPelicula() {
 						system("clear");
 						
 						do{
-							cout << "Título de pelicula inválido." << endl;
+							cout << "Titulo de pelicula invalido." << endl;
 							cout << "1) Reintentar" << endl;
 							cout << "2) Salir" << endl;
 							getline(cin, linea);
@@ -847,7 +867,7 @@ void comentarPelicula() {
 						
 							if(eleccionTituloInvalido == 2){
 								salir = true;
-								cout << "Saliendo al menú principal.." << endl;
+								cout << "Saliendo al menu principal.." << endl;
 							}else if(eleccionTituloInvalido != 1){
 								cout << "Opcion invalida." << endl;
 							}						
@@ -985,7 +1005,7 @@ void verComentariosyPuntajesdePelicula(){
 			cout << "No hay peliculas registradas en el sistema." << endl;
 		} else {
 			for (int i = 0; i < peliculasDisponibles.size(); i++) {
-				cout << "-" << peliculasDisponibles[i].getTitulo() << endl;
+				cout << "-" << peliculasDisponibles[i].getTitulo() << " -Poster: " << peliculasDisponibles[i].getPoster() << endl;
 			}
 		}
 			cout << "------------------------------------------" << endl;

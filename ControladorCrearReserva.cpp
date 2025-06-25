@@ -73,13 +73,19 @@ list<DtCine> ControladorCrearReserva::listarCines() {
 
     // Me devuelven listas
     std::list<Cine*> cines = manejadorC->getCines();
+
+
    
     // busco todos los cines y por cada uno que contenga la pelicula que quiero, lo pongo en una lista
     list<DtCine> dtCines;
     for(Cine* cine : cines) {
+
+
         if(cine->existePelicula(this->getTitulo())){ // esto me devuelve un true si el cine tiene la pelicula.
             DtCine dtCine = cine->getDt();
             dtCines.push_back(dtCine);
+
+
         }
     }
 

@@ -33,26 +33,25 @@ public:
     int getId();
     DtDireccion getDireccion() const;
 
-    void agregarSala(Sala*);
-	const Sala** obtenerSalas() const;
-	int getTopeSalas();
-    std::vector<Sala*> obtenerSalas();
-
     // Funciones para controlar las peliculas del cine
     void agregarPelicula(Pelicula* pelicula);               
-
     void eliminarPeliculaCine(string titulo);               //cu eliminarPelicula
     void eliminarPeliculaDeFunciones(string titulo);        //cu eliminarPelicula
-    void mostrarInformacion() const; 
 
     //cu AltaFuncion
     bool existePelicula(string titulo);
     DtCine getDt();
+    
+    // Operaciones que manejan salas
+	int getTopeSalas();
+    void agregarSala(Sala*);
     Sala* obtenerSalaPorId(int id);         
+    std::vector<Sala*> obtenerSalas();
 
     // cu crearReserva
     list<DtSala> obtenerSalasPorPelicula(string);
     list <DtSala> obtenerSalasPorPeliculaYFecha(string);
+
 };
 
 #endif

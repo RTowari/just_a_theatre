@@ -41,11 +41,6 @@ void ManejadorFuncion::eliminarFuncion(int id){
     this->funciones.erase(it);
 }
 
-void ManejadorFuncion::verFunciones(){
-    for(map<int, Funcion*>::iterator it = this->funciones.begin(); it!=funciones.end(); ++it){
-        cout << it->first << "\n" << endl;
-    }
-}
 
 int ManejadorFuncion::generarNuevoId(){
     if(funciones.empty()){

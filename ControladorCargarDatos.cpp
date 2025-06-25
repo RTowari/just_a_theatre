@@ -4,11 +4,16 @@
 #include "ManejadorCine.h"
 #include "ManejadorFuncion.h"
 #include "ManejadorPelicula.h"
+#include "ManejadorSala.h"
 #include "Usuario.h"
 #include "Pelicula.h"
 #include "Cine.h"
+#include "Sala.h"
+#include "Funcion.h"
 
 #include "DtDireccion.h"
+#include "DtHorario.h"
+#include "DtFecha.h"
 
 #include <vector>
 #include <string>
@@ -40,6 +45,22 @@ void ControladorCargarDatos::cargarDatos(){
     direccion = new DtDireccion("Agraciada", 1005);
     registrarCine(*direccion);
 
+    DtFecha* fecha = new DtFecha(10, 25, 2026);
+    DtHorario* horario = new DtHorario(30, 13, 14, 30);
+    registrarFuncion(1, "Blood_Oath", 1, *fecha, *horario);
+
+    fecha = new DtFecha(10, 26, 2026);
+    horario = new DtHorario(30, 14, 15, 30);
+    registrarFuncion(1, "Blood_Oath", 1, *fecha, *horario);
+
+    fecha = new DtFecha(10, 27, 2026);
+    horario = new DtHorario(30, 15, 16, 30);
+    registrarFuncion(2, "Echoes_of_Tomorrow", 6, *fecha, *horario);
+
+    fecha = new DtFecha(10, 28, 2026);
+    horario = new DtHorario(30, 16, 17, 30);
+    registrarFuncion(2, "Echoes_of_Tomorrow", 6, *fecha, *horario);
+ 
 }
 
 void ControladorCargarDatos::registrarUsuario(string nicknane, string url, string constrasenia){
@@ -54,16 +75,43 @@ void ControladorCargarDatos::registrarPelicula(string titulo, string sinopsis, f
 
 void ControladorCargarDatos::registrarCine(DtDireccion direccion){
    
-    vector<int> capacidadesSalas;
-    capacidadesSalas.push_back(5);
-    capacidadesSalas.push_back(5);
-    capacidadesSalas.push_back(5);
-    capacidadesSalas.push_back(5);
-    capacidadesSalas.push_back(5);
-
-    int id = ManejadorCine::getInstancia()->getSiguienteIdCine();
-    Cine* cine = new Cine(id, direccion);
-    ManejadorCine::getInstancia()->darDeAltaCine(cine, capacidadesSalas);
+    ManejadorCine* manejadorC = ManejadorCine::getInstancia();
     
+    Cine* cine = new Cine(manejadorC->getSiguienteIdCine(), direccion);
+    manejadorC->darDeAltaCine(cine);
+
+    // Ahora creo salas y las añado al manejador usando el int que solo es accesible y no seteable
+    int capacidad = 5;
+    for (int i=0; i < capacidad; i++) {
+        Sala* nuevaSala = new Sala(ManejadorSala::getInstancia()->getTopeSalas(), capacidad);
+        
+        ManejadorSala* manejadorS = ManejadorSala::getInstancia();
+        
+
+        manejadorS->agregarSala(nuevaSala);
+        
+        cine->agregarSala(nuevaSala); // por cada iteracion añado la sala al cine
+    } 
 }
+
+void ControladorCargarDatos::registrarFuncion(int IdC, string titulo, int IdS, DtFecha fecha, DtHorario horario){
+    ManejadorCine* mCine = ManejadorCine::getInstancia();
+    ManejadorFuncion* mFuncion = ManejadorFuncion::getInstancia();
+    ManejadorPelicula* mPelicula = ManejadorPelicula::getInstancia();
+
+    // creo la funcion sin pelicula
+    int id = mFuncion->generarNuevoId();
+    Funcion* funcion = new Funcion(id, fecha, horario);
+
+    // le seteo la pelicula a la funciomn y al cine
+    funcion->agregarPelicula(mPelicula->buscarPelicula(titulo));
+    mCine->buscarCine(IdC)->agregarPelicula(mPelicula->buscarPelicula(titulo));
+
+    // agrego la funcion a la sala
+    mCine->buscarCine(IdC)->obtenerSalaPorId(IdS)->agregarFuncion(funcion);
+
+    // agrego la funcion al menejador
+    mFuncion->agregarFuncion(funcion);
+
+} 
 

@@ -21,7 +21,6 @@ class ManejadorFuncion{
         void agregarFuncion(Funcion*);
         bool existeFuncion(int);
         void eliminarFuncion(int);
-        void verFunciones();
         int generarNuevoId();
         void eliminarFuncionPorTitulo(string titulo);      // para cu EliminarPelicula
         string getPeliculaTitulo();                         // para cu EliminarPelicula 
